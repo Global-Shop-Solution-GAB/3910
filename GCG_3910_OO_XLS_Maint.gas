@@ -1,0 +1,708 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Open Orders Spreadsheet Setup")
+gui.SS_Form1..size(6645,8985)
+gui.SS_Form1..minx(0)
+gui.SS_Form1..miny(0)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,ss_form1_unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.f_Header.create(frame)
+gui.SS_Form1.f_Header.caption("")
+gui.SS_Form1.f_Header.size(6015,1485)
+gui.SS_Form1.f_Header.position(100,200)
+gui.SS_Form1.f_Header.visible(True)
+gui.SS_Form1.f_Header.fontname("Arial")
+gui.SS_Form1.f_Header.fontsize(8)
+gui.SS_Form1.f_ProdLine.create(frame)
+gui.SS_Form1.f_ProdLine.caption("")
+gui.SS_Form1.f_ProdLine.size(3825,705)
+gui.SS_Form1.f_ProdLine.position(200,1900)
+gui.SS_Form1.f_ProdLine.visible(True)
+gui.SS_Form1.f_ProdLine.borderstyle(0)
+gui.SS_Form1.f_ProdLine.fontname("Arial")
+gui.SS_Form1.f_ProdLine.fontsize(8)
+gui.SS_Form1.lbl_txtColumn.create(label,"Column Name",True,1800,200,1,200,200,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtColumn.parent("f_header")
+gui.SS_Form1.lbl_txtColumn.defaultvalue("")
+gui.SS_Form1.lbl_txtColumn.controlgroup(0)
+gui.SS_Form1.txtColumn.create(textbox,"",True,3165,330,0,200,425,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtColumn.parent("f_header")
+gui.SS_Form1.txtColumn.defaultvalue("")
+gui.SS_Form1.txtColumn.controlgroup(0)
+gui.SS_Form1.cmd_txtColumn.create(button)
+gui.SS_Form1.cmd_txtColumn.caption("^")
+gui.SS_Form1.cmd_txtColumn.visible(True)
+gui.SS_Form1.cmd_txtColumn.size(330,330)
+gui.SS_Form1.cmd_txtColumn.zorder(0)
+gui.SS_Form1.cmd_txtColumn.position(3400,400)
+gui.SS_Form1.cmd_txtColumn.enabled(True)
+gui.SS_Form1.cmd_txtColumn.parent("f_header")
+gui.SS_Form1.cmd_txtColumn.fontname("Arial")
+gui.SS_Form1.cmd_txtColumn.fontsize(8)
+gui.SS_Form1.cmd_txtColumn.event(click,cmd_txtcolumn_click)
+gui.SS_Form1.cmd_txtColumn.defaultvalue("")
+gui.SS_Form1.cmd_txtColumn.controlgroup(0)
+gui.SS_Form1.lbl_txtLocation.create(label,"Location",True,1800,200,1,4500,200,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtLocation.parent("f_header")
+gui.SS_Form1.lbl_txtLocation.defaultvalue("")
+gui.SS_Form1.lbl_txtLocation.controlgroup(0)
+gui.SS_Form1.txtLocation.create(textbox,"",True,855,330,0,4480,425,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtLocation.parent("f_header")
+gui.SS_Form1.txtLocation.defaultvalue("")
+gui.SS_Form1.txtLocation.controlgroup(0)
+gui.SS_Form1.cmd_txtLocation.create(button)
+gui.SS_Form1.cmd_txtLocation.caption("^")
+gui.SS_Form1.cmd_txtLocation.visible(True)
+gui.SS_Form1.cmd_txtLocation.size(330,330)
+gui.SS_Form1.cmd_txtLocation.zorder(0)
+gui.SS_Form1.cmd_txtLocation.position(5400,425)
+gui.SS_Form1.cmd_txtLocation.enabled(True)
+gui.SS_Form1.cmd_txtLocation.parent("f_header")
+gui.SS_Form1.cmd_txtLocation.fontname("Arial")
+gui.SS_Form1.cmd_txtLocation.fontsize(8)
+gui.SS_Form1.cmd_txtLocation.event(click,cmd_txtlocation_click)
+gui.SS_Form1.cmd_txtLocation.defaultvalue("")
+gui.SS_Form1.cmd_txtLocation.controlgroup(0)
+gui.SS_Form1.cmdAdd.create(button)
+gui.SS_Form1.cmdAdd.caption("Add")
+gui.SS_Form1.cmdAdd.visible(True)
+gui.SS_Form1.cmdAdd.size(1000,360)
+gui.SS_Form1.cmdAdd.zorder(0)
+gui.SS_Form1.cmdAdd.position(2600,185)
+gui.SS_Form1.cmdAdd.enabled(True)
+gui.SS_Form1.cmdAdd.parent("f_prodline")
+gui.SS_Form1.cmdAdd.fontname("Arial")
+gui.SS_Form1.cmdAdd.fontsize(8)
+gui.SS_Form1.cmdAdd.event(click,cmdadd_click)
+gui.SS_Form1.cmdAdd.defaultvalue("")
+gui.SS_Form1.cmdAdd.controlgroup(0)
+gui.SS_Form1.cmdSave.create(button)
+gui.SS_Form1.cmdSave.caption("Save")
+gui.SS_Form1.cmdSave.visible(True)
+gui.SS_Form1.cmdSave.size(1000,360)
+gui.SS_Form1.cmdSave.zorder(0)
+gui.SS_Form1.cmdSave.position(200,8000)
+gui.SS_Form1.cmdSave.enabled(True)
+gui.SS_Form1.cmdSave.fontname("Arial")
+gui.SS_Form1.cmdSave.fontsize(8)
+gui.SS_Form1.cmdSave.event(click,cmdsave_click)
+gui.SS_Form1.cmdSave.defaultvalue("")
+gui.SS_Form1.cmdSave.controlgroup(0)
+gui.SS_Form1.cmdDelete.create(button)
+gui.SS_Form1.cmdDelete.caption("Delete")
+gui.SS_Form1.cmdDelete.visible(True)
+gui.SS_Form1.cmdDelete.size(1000,360)
+gui.SS_Form1.cmdDelete.zorder(0)
+gui.SS_Form1.cmdDelete.position(1440,8000)
+gui.SS_Form1.cmdDelete.enabled(True)
+gui.SS_Form1.cmdDelete.fontname("Arial")
+gui.SS_Form1.cmdDelete.fontsize(8)
+gui.SS_Form1.cmdDelete.event(click,cmddelete_click)
+gui.SS_Form1.cmdDelete.defaultvalue("")
+gui.SS_Form1.cmdDelete.controlgroup(0)
+gui.SS_Form1.txtProdLine.create(textbox,"",True,1215,300,0,100,185,True,0,Arial,8,-2147483643,1)
+gui.SS_Form1.txtProdLine.parent("f_prodline")
+gui.SS_Form1.txtProdLine.defaultvalue("")
+gui.SS_Form1.txtProdLine.controlgroup(0)
+gui.SS_Form1.lbl3.create(label,"Product Line",True,1935,255,1,100,-10,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl3.parent("f_prodline")
+gui.SS_Form1.lbl3.defaultvalue("")
+gui.SS_Form1.lbl3.controlgroup(0)
+gui.SS_Form1.cmd_ProdLine.create(button)
+gui.SS_Form1.cmd_ProdLine.caption("^")
+gui.SS_Form1.cmd_ProdLine.visible(True)
+gui.SS_Form1.cmd_ProdLine.size(330,330)
+gui.SS_Form1.cmd_ProdLine.zorder(0)
+gui.SS_Form1.cmd_ProdLine.position(1500,185)
+gui.SS_Form1.cmd_ProdLine.enabled(True)
+gui.SS_Form1.cmd_ProdLine.parent("f_prodline")
+gui.SS_Form1.cmd_ProdLine.fontname("Arial")
+gui.SS_Form1.cmd_ProdLine.fontsize(8)
+gui.SS_Form1.cmd_ProdLine.event(click,cmd_prodline_click)
+gui.SS_Form1.cmd_ProdLine.defaultvalue("")
+gui.SS_Form1.cmd_ProdLine.controlgroup(0)
+gui.SS_Form1.gsf_ProdList.create(gsflexgrid)
+gui.SS_Form1.gsf_ProdList.FixedRows(0)
+gui.SS_Form1.gsf_ProdList.FixedCols(0)
+gui.SS_Form1.gsf_ProdList.visible(True)
+gui.SS_Form1.gsf_ProdList.size(5910,4935)
+gui.SS_Form1.gsf_ProdList.zorder(0)
+gui.SS_Form1.gsf_ProdList.position(200,2815)
+gui.SS_Form1.gsf_ProdList.enabled(True)
+gui.SS_Form1.gsf_ProdList.event(mouseup,gsf_prodlist_mouseup)
+gui.SS_Form1.cmdLoad.create(button)
+gui.SS_Form1.cmdLoad.caption("Load")
+gui.SS_Form1.cmdLoad.visible(True)
+gui.SS_Form1.cmdLoad.size(855,375)
+gui.SS_Form1.cmdLoad.zorder(0)
+gui.SS_Form1.cmdLoad.position(200,950)
+gui.SS_Form1.cmdLoad.enabled(True)
+gui.SS_Form1.cmdLoad.parent("f_header")
+gui.SS_Form1.cmdLoad.fontname("Arial")
+gui.SS_Form1.cmdLoad.fontsize(8)
+gui.SS_Form1.cmdLoad.event(click,cmdload_click)
+gui.SS_Form1.cmdLoad.defaultvalue("")
+gui.SS_Form1.cmdLoad.controlgroup(0)
+gui.SS_Form1.txtColumn.tabstop(True)
+gui.SS_Form1.txtColumn.tabindex(1)
+gui.SS_Form1.cmd_txtColumn.tabstop(True)
+gui.SS_Form1.cmd_txtColumn.tabindex(2)
+gui.SS_Form1.txtLocation.tabstop(True)
+gui.SS_Form1.txtLocation.tabindex(3)
+gui.SS_Form1.cmd_txtLocation.tabstop(True)
+gui.SS_Form1.cmd_txtLocation.tabindex(4)
+gui.SS_Form1.cmdLoad.tabstop(True)
+gui.SS_Form1.cmdLoad.tabindex(5)
+gui.SS_Form1.txtProdLine.tabstop(True)
+gui.SS_Form1.txtProdLine.tabindex(6)
+gui.SS_Form1.cmd_ProdLine.tabstop(True)
+gui.SS_Form1.cmd_ProdLine.tabindex(7)
+gui.SS_Form1.cmdAdd.tabstop(True)
+gui.SS_Form1.cmdAdd.tabindex(8)
+gui.SS_Form1.cmdSave.tabstop(True)
+gui.SS_Form1.cmdSave.tabindex(9)
+gui.SS_Form1.cmdDelete.tabstop(True)
+gui.SS_Form1.cmdDelete.tabindex(10)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.bChanged.Declare(Boolean,False)
+Variable.UDT.uTable.Define("Column_Header",String,Column_Header)
+Variable.UDT.uTable.Define("Code_Location",String,Code_Location)
+Variable.UDT.uTable.Define("Code_PL",String,Code_PL)
+Variable.uGlobal.uTable.Declare("uTable")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Quote 4849: Custom Open Orders Excel Spreadsheet
+'coded by TRT
+'11/25/13
+
+'Maintenance program that will allow the user to set up products lines(columns) that will be included in the Open Orders excel file.
+'GAB Screen contains: text box,browser to customt table, locations text box with locations browser, product line text box(with browser)
+'ADD COMMAND TO ADD THE SELECTION TO a flexgrid'
+'save and delete command that will add all flexgrid values , or delete the entire column information
+
+'open our connection and show screen
+F.ODBC.Connection!conX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+V.uGlobal.uTable.Redim(-1,-1)
+
+F.Intrinsic.Control.CallSub(Buildstyle)
+
+Gui.SS_Form1..Show
+
+
+Program.Sub.Main.End
+
+program.sub.ss_form1_unload.start
+V.Local.sret.Declare(String)
+
+F.Intrinsic.Control.If(V.Global.bChanged,=,True)
+	'they haven't saved their changes.
+	F.Intrinsic.UI.Msgbox("Changes have not been saved. Did you want to save before exit?","Changes NOT saved.",4,V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sret,=,6)
+		F.Intrinsic.Control.CallSub(Cmdsave_click)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+'closeanyconnections
+F.ODBC.Connection!conX.Close
+'close the program
+F.Intrinsic.Control.End
+
+program.sub.ss_form1_unload.end
+
+program.sub.cmddelete_click.start
+F.Intrinsic.Control.SetErrorHandler("cmddelete_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sColumn.Declare(String)
+V.Local.sLocation.Declare(String)
+V.Local.sSQL.Declare(String)
+
+V.Local.sColumn.Set(V.Screen.SS_Form1!txtColumn.Text)
+V.Local.sLocation.Set(V.Screen.SS_Form1!txtLocation.Text)
+
+
+F.Intrinsic.Control.If(V.Local.sColumn.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Column name can not be blank.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.ElseIf(V.Local.sLocation.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Location can not be blank.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Endif
+
+F.Intrinsic.UI.Msgbox("Are you sure?","Confirm",4,V.Local.sSQL)
+F.Intrinsic.Control.If(V.Local.sSQL.Trim,=,6)
+'said yes	
+	F.Intrinsic.String.Build("Delete From GCG_3910_OO_XLS_Map Where Column_Header = '{0}' And Code_Location = '{1}'",V.Local.sColumn.Trim,V.Local.sLocation.Trim,V.Local.sSQL)
+	F.ODBC.Connection!conX.Execute(V.Local.sSQL)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.CallSub(Clear_fields)
+F.Intrinsic.Control.CallSub(Buildstyle)
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmddelete_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmddelete_click.end
+
+program.sub.cmdsave_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdsave_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.local.sColumn.Declare(String)
+V.Local.sProdLine.Declare(String)
+V.Local.sLocation.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.iID.Declare(Long)
+V.Local.iRow.Declare(Long)
+V.Local.iRows.Declare(Long)
+
+
+
+V.Local.sColumn.Set(V.Screen.SS_Form1!txtColumn.Text)
+V.Local.sLocation.Set(V.Screen.SS_Form1!txtLocation.Text)
+
+F.Intrinsic.Control.If(V.Local.sColumn.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Column name can not be blank.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.ElseIf(V.Local.sLocation.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Location can not be blank.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Endif
+
+
+F.Intrinsic.String.Build("Delete From GCG_3910_OO_XLS_Map Where Column_Header = '{0}' And Code_Location = '{1}'",V.Local.sColumn.Trim,V.Local.sLocation.Trim,V.Local.sSQL)
+F.ODBC.Connection!conX.Execute(V.Local.sSQL)
+
+F.ODBC.Connection!conX.OpenLocalRecordsetRW("RST","Select * From GCG_3910_OO_XLS_Map")
+F.Intrinsic.Variable.SaveUDTToRecordset("conX","RST","v.uglobal.uTable")
+V.Global.bChanged.Set(False)
+'redim our udt
+V.uGlobal.uTable.Redim(-1,-1)
+'call our clear sub
+F.Intrinsic.Control.CallSub(Clear_fields)
+'set focus to the column header text box
+F.Intrinsic.Control.CallSub(Buildstyle)
+Gui.SS_Form1.txtColumn.SetFocus
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdsave_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdsave_click.end
+
+program.sub.cmd_txtcolumn_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_txtcolumn_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iWidth.Declare(Long)
+V.Local.sTitle.Declare(String)
+
+'here is where we will query our custom table GCG_OO_XLS_Map
+F.Intrinsic.String.Split("Column Name*!*Location","*!*",V.Local.sTitle)
+F.Intrinsic.String.Split("3500*!*1500","*!*",V.Local.iWidth)
+
+F.Intrinsic.UI.Browser("Select an existing Record","conX","Select Distinct Column_Header, Code_Location From GCG_3910_OO_XLS_Map Order By Column_Header,Code_Location,Code_PL",V.Local.sTitle,V.Local.iWidth,V.Local.sRet)
+
+F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"***CANCEL***")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtColumn.Text(V.Local.sRet(0).Trim)
+	Gui.SS_Form1.txtLocation.Text(V.Local.sRet(1).Trim)
+'	F.Intrinsic.Control.CallSub(Populate_flex)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_txtcolumn_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_txtcolumn_click.end
+
+program.sub.cmd_txtlocation_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_txtlocation_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sTitles.Declare(String)
+V.Local.iWidths.Declare(Long)
+V.Local.sRet.Declare(String)
+
+F.Intrinsic.String.Split("Location*!*Description*!*Closed Flag","*!*",V.Local.sTitles)
+F.Intrinsic.String.Split("1000*!*1500*!*1000","*!*",V.Local.iWidths)
+
+F.Intrinsic.UI.Browser("Select a Location Code","conX","Select Location, Location_Desc, Flag_Closed From V_Locations Order By Location",V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+
+F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"***CANCEL***")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtLocation.Text(V.Local.sRet(0))
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_txtlocation_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_txtlocation_click.end
+
+program.sub.cmd_prodline_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_prodline_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+'product line browser
+
+F.Intrinsic.UI.Browser(130,"",V.Local.sRet)
+
+F.Intrinsic.Control.If(V.Local.sRet.Trim,=,"***CANCEL***")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtProdLine.Text(V.Local.sRet(0))
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_prodline_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_prodline_click.end
+
+program.sub.cmdadd_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdadd_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sHeader.Declare(String)
+V.Local.sLocation.Declare(String)
+V.Local.sProdLine.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.iub.Declare(Long)
+
+
+
+'make sure something is either in location or header record
+V.Local.sHeader.Set(V.Screen.SS_Form1!txtColumn.text)
+V.local.sLocation.Set(V.Screen.SS_Form1!txtLocation.Text)
+V.Local.sProdLine.Set(V.Screen.SS_Form1!txtProdLine.Text)
+
+F.Intrinsic.Control.If(V.Local.sHeader.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Column name can not be blank.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.ElseIf(V.Local.sLocation.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Location can not be blank.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.ElseIf(V.Local.sProdLine.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Product Line can not be blank")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'first make sure it does not already exist in the udt
+F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uTable!Code_PL,V.Local.sProdLine.Trim,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet.Trim,<>,"")
+	'means that the product line already exists within our udt.
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+
+V.Local.iub.Set(V.uGlobal.uTable.UBound)
+F.Intrinsic.Control.If(V.Local.iub,<,0)
+	V.Local.iub.Set(0)
+	V.uGlobal.uTable.Redim(0,0)
+F.Intrinsic.Control.Else
+	F.Intrinsic.Math.Add(V.Local.iub,1,V.Local.iub)
+	V.uglobal.uTable.RedimPreserve(0,V.Local.iub)
+F.Intrinsic.Control.EndIf
+
+V.uGlobal.uTable(v.Local.iub)!Column_Header.Set(V.Local.sHeader.Trim)
+V.uGlobal.uTable(v.Local.iub)!Code_Location.Set(V.Local.sLocation.Trim)
+V.uGlobal.uTable(v.Local.iub)!Code_PL.Set(V.Local.sProdLine.Trim)
+V.Global.bChanged.Set(True)
+Gui.SS_Form1.gsf_ProdList.Visible(false)
+F.Intrinsic.Variable.UDTMultiQuickSort(V.uglobal.uTable!Code_PL,False)
+Gui.SS_Form1.gsf_ProdList.LoadFromUDT("v.uglobal.uTable","Code_PL",2)
+Gui.SS_Form1.gsf_ProdList.Visible(True)
+Gui.SS_Form1.txtProdLine.Text("")
+Gui.SS_Form1.txtProdLine.SetFocus
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdadd_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.Endif
+
+
+
+program.sub.cmdadd_click.end
+
+Program.Sub.BuildStyle.Start
+F.Intrinsic.Control.SetErrorHandler("BuildStyle_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+
+'flexgrid build style
+Gui.SS_Form1.gsf_ProdList.Rows(1)
+Gui.SS_Form1.gsf_ProdList.Rows(2)
+Gui.SS_Form1.gsf_ProdList.FixedRows(1)
+Gui.SS_Form1.gsf_ProdList.Cols(2)
+Gui.SS_Form1.gsf_ProdList.SetColumnPercentages(".60:.32")
+
+'style 1
+'column 0 will be the product line information
+Gui.SS_Form1.gsf_ProdList.BuildStyle(1,0,"Type","Locked",True)
+Gui.SS_Form1.gsf_ProdList.BuildStyle(1,0,"Format","Alignment",2)
+
+Gui.SS_Form1.gsf_ProdList.TextMatrix(0,0,"Product Line")
+
+'column 1
+'Gui.SS_Form1.gsf_ProdList.BuildStyle(1,1,"Type","Command","Remove")
+Gui.SS_Form1.gsf_ProdList.BuildStyle(1,1,"Type","Locked",True)
+Gui.SS_Form1.gsf_ProdList.BuildStyle(1,1,"Format","Alignment",4)
+Gui.SS_Form1.gsf_ProdList.TextMatrix(1,0,"Remove")
+
+'style 2
+'column 0 will be the product line information
+Gui.SS_Form1.gsf_ProdList.BuildStyle(2,0,"Type","Locked",True)
+Gui.SS_Form1.gsf_ProdList.BuildStyle(2,0,"Format","Alignment",2)
+
+Gui.SS_Form1.gsf_ProdList.TextMatrix(0,0,"Product Line")
+
+'column 1
+Gui.SS_Form1.gsf_ProdList.BuildStyle(2,1,"Type","Command","Remove")
+Gui.SS_Form1.gsf_ProdList.BuildStyle(2,1,"Format","Alignment",4)
+Gui.SS_Form1.gsf_ProdList.TextMatrix(1,0,"Remove")
+
+Gui.SS_Form1.gsf_ProdList.ApplyStyle(1,1)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("BuildStyle_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.BuildStyle.End
+
+Program.Sub.Populate_Flex.Start
+F.Intrinsic.Control.SetErrorHandler("Populate_Flex_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+'populate our flexgrid
+'by loading from our recordset to udt
+'then udt to flexgrid
+
+F.Intrinsic.Control.If(V.uglobal.uTable.UBound,>,-1)
+	Gui.SS_Form1.gsf_ProdList.LoadFromUDT("v.uglobal.uTable","CODE_PL",2)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("No Records found.")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Populate_Flex_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Populate_Flex.End
+
+program.sub.cmdload_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdload_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sLocation.Declare(String)
+V.Local.sHeader.Declare(String)
+
+V.Local.sHeader.Set(V.Screen.SS_Form1!txtColumn.Text)
+V.Local.sLocation.Set(V.Screen.SS_Form1!txtLocation.Text)
+
+F.Intrinsic.Control.If(V.Global.bChanged,=,True)
+	'changes not been saved
+	F.Intrinsic.UI.Msgbox("Changes have not been Saved.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.ElseIf(V.Local.sHeader.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Please choose a Column Header.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.ElseIf(V.Local.sLocation.Trim,=,"")
+	F.Intrinsic.UI.Msgbox("Please choose a Location Code to assign.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'load our udt from recordset
+'then load our flex from udt
+F.Intrinsic.String.Build("Select Column_Header, Code_Location, Code_PL From GCG_3910_OO_XLS_Map Where Column_Header = '{0}' AND Code_Location = '{1}' Order By Code_PL",V.Local.sHeader.Trim,V.Local.sLocation.Trim,V.Local.sSQL)
+F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.conX!RST.EOF,=,True)
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Else
+	F.Intrinsic.variable.LoadUDTFromRecordset("conX","rst","v.uglobal.uTable",False)
+	F.Intrinsic.Control.CallSub(Populate_flex)
+F.Intrinsic.Control.Endif
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdload_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdload_click.end
+
+program.sub.gsf_prodlist_mouseup.start
+F.Intrinsic.Control.SetErrorHandler("gsf_prodlist_mouseup_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.iRows.Declare(Long)
+V.Local.sPL.Declare(String)
+
+F.Intrinsic.Control.If(V.Args.mousecol,=,1)
+F.Intrinsic.Control.AndIf(V.Args.mouserow,>,0)
+	V.Local.iRow.Set(V.Screen.SS_Form1!gsf_ProdList.Row)
+	Gui.SS_Form1.gsf_ProdList.GetTextMatrix(0,V.Local.iRow,V.Local.sPL)
+	F.Intrinsic.Control.If(V.Local.sPL.Trim,<>,"")
+		F.Intrinsic.Variable.UDTMultiFlag(V.uGlobal.uTable!Code_PL,V.Local.sPL)
+		F.Intrinsic.Variable.UDTDeleteFlagged(V.uGlobal.uTable)
+		'load our flexgrid
+		Gui.SS_Form1.gsf_ProdList.Visible(false)
+		Gui.SS_Form1.gsf_ProdList.LoadFromUDT("v.uglobal.uTable","Code_PL",2)
+		V.Global.bChanged.Set(True)
+		Gui.SS_Form1.gsf_ProdList.Visible(True)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("gsf_prodlist_mouseup_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Ss_form1_unload)
+F.Intrinsic.Control.EndIf
+
+	
+
+
+program.sub.gsf_prodlist_mouseup.end
+
+Program.Sub.Clear_Fields.Start
+F.Intrinsic.Control.SetErrorHandler("Clear_Fields_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'clear our text fields
+Gui.SS_Form1.txtColumn.Text("")
+Gui.SS_Form1.txtLocation.Text("")
+Gui.SS_Form1.txtProdLine.Text("")
+
+Gui.SS_Form1.gsf_ProdList.Visible(false)
+F.Intrinsic.Control.CallSub(Buildstyle)
+Gui.SS_Form1.gsf_ProdList.Visible(True)
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Clear_Fields_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_XLS_OO_Maint.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.Callsub(Ss_form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Clear_Fields.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_XLS_Open_Order_Maint$}$TRT$}$11/21/2013
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Coded for Quote 4849
+Used in conjunction with GAb script
+This GAB script will write to a custom table values(product lines) that  the customer would like to have included on the spreadsheet
+The Product Lines will be written to a custom table
+and the custom table will be referenced by the second GAB script that creates the spreadsheet.
+
+Program.Sub.Comments.End
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Open Orders Spreadsheet Setup
+SS_Form1.CTRL{{NAME::txtColumn\\TYPE::2\\CAPTION::Column Name\\GROUP::1\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtLocation\\TYPE::2\\CAPTION::Location\\GROUP::-1\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdAdd\\TYPE::5\\CAPTION::Add\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdSave\\TYPE::5\\CAPTION::Save\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdDelete\\TYPE::5\\CAPTION::Delete\\GROUP::-1\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
