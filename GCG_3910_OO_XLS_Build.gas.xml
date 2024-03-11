@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SyntaxEdit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SearchOptions>EntireScope FindTextAtCursor FindSelectedText CycledSearch</SearchOptions>
+  <BorderStyle>None</BorderStyle>
+  <Pages>
+    <DefaultPage>
+      <Header>
+        <Offset>
+          <X>0</X>
+          <Y>0</Y>
+        </Offset>
+      </Header>
+      <Footer>
+        <Offset>
+          <X>0</X>
+          <Y>0</Y>
+        </Offset>
+      </Footer>
+      <PageSize>
+        <Width>0</Width>
+        <Height>0</Height>
+      </PageSize>
+    </DefaultPage>
+  </Pages>
+  <DisplayStrings />
+  <Selection>
+    <SelectionRect>
+      <Location>
+        <X>0</X>
+        <Y>796</Y>
+      </Location>
+      <Size>
+        <Width>24</Width>
+        <Height>4</Height>
+      </Size>
+      <X>0</X>
+      <Y>796</Y>
+      <Width>24</Width>
+      <Height>4</Height>
+    </SelectionRect>
+    <Options>UseColors OverwriteBlocks SelectLineOnTripleClick CopyLineWhenEmpty SelectWordOnCtrlClick</Options>
+  </Selection>
+  <Gutter>
+    <LineNumbersForeColor>WindowText</LineNumbersForeColor>
+    <Options>PaintLineNumbers PaintBookMarks PaintLineModificators</Options>
+  </Gutter>
+  <Margin>
+    <Visible>false</Visible>
+  </Margin>
+  <LineStyles />
+  <LineSeparator />
+  <Printing>
+    <Footer>
+      <Offset>
+        <X>0</X>
+        <Y>0</Y>
+      </Offset>
+    </Footer>
+    <Header>
+      <Offset>
+        <X>0</X>
+        <Y>0</Y>
+      </Offset>
+    </Header>
+  </Printing>
+  <WhiteSpace />
+  <TextSource>
+    <Position>
+      <X>0</X>
+      <Y>796</Y>
+    </Position>
+    <Lexer>
+      <Scheme>
+        <Author>Quantum Whale, LLC.</Author>
+        <Copyright>Copyright (c) 2004 - 2014 Quantum Whale LLC.</Copyright>
+        <FileType>gas</FileType>
+        <Version>1.5</Version>
+        <Styles>
+          <Style>
+            <Name>idents</Name>
+            <ForeColor>ControlText</ForeColor>
+          </Style>
+          <Style>
+            <Name>numbers</Name>
+            <ForeColor>ControlText</ForeColor>
+          </Style>
+          <Style>
+            <Name>reswords</Name>
+            <ForeColor>Blue</ForeColor>
+          </Style>
+          <Style>
+            <Name>comments</Name>
+            <ForeColor>Green</ForeColor>
+            <PlainText>true</PlainText>
+          </Style>
+          <Style>
+            <Name>xmlcomments</Name>
+            <ForeColor>Gray</ForeColor>
+          </Style>
+          <Style>
+            <Name>symbols</Name>
+            <ForeColor>WindowText</ForeColor>
+          </Style>
+          <Style>
+            <Name>whitespace</Name>
+            <ForeColor>WindowText</ForeColor>
+          </Style>
+          <Style>
+            <Name>strings</Name>
+            <ForeColor>Maroon</ForeColor>
+            <PlainText>true</PlainText>
+          </Style>
+          <Style>
+            <Name>directives</Name>
+            <ForeColor>Blue</ForeColor>
+          </Style>
+          <Style>
+            <Name>htmlparams</Name>
+            <ForeColor>Red</ForeColor>
+          </Style>
+          <Style>
+            <Name>syntax errors</Name>
+            <ForeColor>Red</ForeColor>
+          </Style>
+          <Style>
+            <Name>codes nippets</Name>
+            <ForeColor>Black</ForeColor>
+            <BackColor>255:180:228:180</BackColor>
+          </Style>
+          <Style>
+            <Name>GabReservedWords</Name>
+            <ForeColor>Blue</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabTokenWithBrackets</Name>
+            <ForeColor>Gray</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabFunctionIntrinsicDebug</Name>
+            <ForeColor>White</ForeColor>
+            <BackColor>Red</BackColor>
+            <FontStyle>Bold</FontStyle>
+            <PlainText>true</PlainText>
+          </Style>
+          <Style>
+            <Name>GabVariable</Name>
+            <ForeColor>Teal</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabVariableSystemDefined</Name>
+            <ForeColor>Teal</ForeColor>
+            <FontStyle>Bold Italic</FontStyle>
+          </Style>
+          <Style>
+            <Name>GabGui</Name>
+            <ForeColor>OrangeRed</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabProgramSubStartEnd</Name>
+            <ForeColor>Black</ForeColor>
+            <BackColor>LightGray</BackColor>
+            <FontStyle>Bold</FontStyle>
+            <PlainText>true</PlainText>
+          </Style>
+        </Styles>
+      </Scheme>
+    </Lexer>
+    <TextStrings>
+      <Lines>
+        <string>Program.Sub.ScreenSU.Start</string>
+        <string>Program.Sub.ScreenSU.End</string>
+        <string />
+        <string>Program.Sub.Preflight.Start</string>
+        <string />
+        <string>Variable.UDT.uMap.Define("Col_Header",String,Column_header)</string>
+        <string>Variable.UDT.uMap.Define("Code_Location",String,Code_Location)</string>
+        <string>Variable.UDT.uMap.Define("Code_PL",String,Code_PL)</string>
+        <string>Variable.uGlobal.uMap.Declare("uMap")</string>
+        <string>Variable.UDT.uOpenOrders.Define("Order_No",String,Order_No)</string>
+        <string>Variable.UDT.uOpenOrders.Define("Date_Order",String,Date_Order)</string>
+        <string>Variable.UDT.uOpenOrders.Define("PL",String,Product_Line)</string>
+        <string>Variable.UDT.uOpenOrders.Define("Extension",Float,Extension_Order)</string>
+        <string>Variable.UDT.uOpenOrders.Define("LOCATION",String,Location)</string>
+        <string>Variable.UDT.uPriceCat.Define("Price_Category",String,Price_Category)</string>
+        <string>Variable.UDT.uPriceCat.Define("Descr",String,DESCR)</string>
+        <string>Variable.uGlobal.uOpenOrders.Declare("uOpenOrders")</string>
+        <string>Variable.uGlobal.uPriceCat.Declare("uPriceCat")</string>
+        <string>Variable.UDT.uPriceCat_OrderH.Define("Order_No",String,Order_No)</string>
+        <string>Variable.UDT.uPriceCat_OrderH.Define("Price_Cat",String,Price_Category)</string>
+        <string>Variable.UDT.uPriceCat_OrderH.Define("Date_Order",String,Date_Order)</string>
+        <string>Variable.uGlobal.uPriceCat_OrderH.Declare("uPriceCat_OrderH")</string>
+        <string>Variable.Global.sFileType.Declare(String)</string>
+        <string>Variable.UDT.uMapCopy.Define("Col_Header",String,Column_Header)</string>
+        <string>Variable.UDT.uMapCopy.Define("Code_Location",String,Code_Location)</string>
+        <string>Variable.UDT.uMapCopy.Define("Code_PL",String,Code_PL)</string>
+        <string>Variable.uGlobal.uMapCopy.Declare("uMapCopy")</string>
+        <string>Variable.UDT.uCPY_OpenOrders.Define("Order_No",String,Order_No)</string>
+        <string>Variable.UDT.uCPY_OpenOrders.Define("Date_Order",String,Date_Order)</string>
+        <string>Variable.UDT.uCPY_OpenOrders.Define("PL",String,Product_Line)</string>
+        <string>Variable.UDT.uCPY_OpenOrders.Define("Extension",Float,Extension)</string>
+        <string>Variable.UDT.uCPY_OpenOrders.Define("LOCATION",String,Location)</string>
+        <string>Variable.uGlobal.uCPY_OpenOrders.Declare("uCPY_OpenOrders")</string>
+        <string>Variable.UDT.uColumn_Names.Define("sColumn_Header",String,Column_Header)</string>
+        <string>Variable.uGlobal.uColumn_Names.Declare("uColumn_Names")</string>
+        <string>Variable.UDT.uExtTotals.Define("Date_Order",String,Date_Order)</string>
+        <string>Variable.UDT.uExtTotals.Define("PL",String,Product_Line)</string>
+        <string>Variable.UDT.uExtTotals.Define("Total_Ext",Float,Total_Extension)</string>
+        <string>Variable.uGlobal.uExtTotals.Declare("uExtTotals")</string>
+        <string>Variable.UDT.uLocations.Define("Location",String,Code_Location)</string>
+        <string>Variable.uGlobal.uLocations.Declare("uLocations")</string>
+        <string>Variable.Global.sFile.Declare(String)</string>
+        <string>Program.Sub.Preflight.End</string>
+        <string />
+        <string>Program.Sub.Main.Start</string>
+        <string>'Quote 4849</string>
+        <string>'Simpson Performance Products( Original)</string>
+        <string />
+        <string>'coded by TRT</string>
+        <string>'11/25/13</string>
+        <string />
+        <string>'</string>
+        <string />
+        <string>V.Local.bRet.Declare(Boolean)</string>
+        <string />
+        <string>'open our conneciton</string>
+        <string>F.ODBC.Connection!conX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)</string>
+        <string>V.uGlobal.uMap.Redim(-1,-1)</string>
+        <string>V.uGlobal.uOpenOrders.Redim(-1,-1)</string>
+        <string>V.uGlobal.uPriceCat.Redim(-1,-1)</string>
+        <string>V.uGlobal.uPriceCat_OrderH.Redim(-1,-1)</string>
+        <string>V.uGlobal.uExtTotals.Redim(-1,-1)</string>
+        <string>V.uGlobal.uLocations.Redim(-1,-1)</string>
+        <string />
+        <string />
+        <string>F.ODBC.Connection!conX.TableExists("GCG_3910_OO_XLS_Map",V.Local.bRet)</string>
+        <string>F.Intrinsic.Control.If(V.Local.bRet,=,False)</string>
+        <string>	F.Intrinsic.Debug.SetLA("GCG_3910_OO_XLS_Map table not found. Ending Program")</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>'sub to determine if we have open office or excel to use.</string>
+        <string>F.Intrinsic.Control.CallSub(File_type)</string>
+        <string />
+        <string />
+        <string>Program.Sub.Main.End</string>
+        <string />
+        <string>Program.Sub.Unload.Start</string>
+        <string>'close connection</string>
+        <string>F.ODBC.Connection!conX.Close</string>
+        <string />
+        <string />
+        <string>'end program</string>
+        <string>F.Intrinsic.Control.End</string>
+        <string />
+        <string>Program.Sub.Unload.End</string>
+        <string />
+        <string>Program.Sub.File_Type.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("File_Type_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.bRet.Declare(Boolean)</string>
+        <string />
+        <string>'determine here whether or not we have open office or xls installed on the computer</string>
+        <string>F.Automation.MSExcel.CheckPresence(V.Local.bRet)</string>
+        <string />
+        <string />
+        <string>F.Intrinsic.Control.If(V.Local.bRet,=,True)</string>
+        <string>'	'we know to use office of excel</string>
+        <string>	V.Global.sFileType.Set("EXCEL")</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	'check for open office equivalent.</string>
+        <string>	F.Automation.OOGeneral.CheckPresence(V.Local.bRet)</string>
+        <string>	F.Intrinsic.Control.If(V.Local.bRet,=,True)</string>
+        <string>	'we know to use open office</string>
+        <string>	V.Global.sFileType.Set("OOCALC")</string>
+        <string>	F.Intrinsic.Control.Else</string>
+        <string>		F.Intrinsic.Debug.SetLA("Microsoft Excel or Open Office equivalent not found. Ending program.")</string>
+        <string>		F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string />
+        <string>'if we haven't exited, lets populate our UDTs.</string>
+        <string>F.Intrinsic.Control.CallSub(Get_orders)</string>
+        <string />
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("File_Type_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.Debug.SetLA(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string />
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string />
+        <string />
+        <string>Program.Sub.File_Type.End</string>
+        <string />
+        <string>Program.Sub.Excel_Create.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Excel_Create_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sSheet.Declare(String)</string>
+        <string>V.Local.sFin.Declare(String)</string>
+        <string />
+        <string>V.Local.sSheet.Set(V.Args.Sheet)</string>
+        <string />
+        <string>F.Intrinsic.Control.If(V.local.sSheet.Trim,&lt;&gt;,"")</string>
+        <string>	F.Automation.MSExcel.WriteSpreadsheet(V.Global.sFile,"",V.Local.sSheet)</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	F.Intrinsic.Debug.SetLA("No data was passed to be written. Ending program.")</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>F.Intrinsic.String.Build("Custom Open Orders XLS Report has been created. {0}{0}File path: {0}{1}",Variable.Ambient.NewLine,V.Global.sFile, V.Local.sFin)</string>
+        <string>F.Intrinsic.UI.Msgbox(V.Local.sFin, "Process Complete")</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Excel_Create_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.Debug.SetLA(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>Program.Sub.Excel_Create.End</string>
+        <string />
+        <string>Program.Sub.OOffice_Create.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("OOffice_Create_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sSheet.Declare(String)</string>
+        <string>V.Local.sFin.Declare(String)</string>
+        <string />
+        <string>V.Local.sSheet.Set(V.Args.Sheet)</string>
+        <string />
+        <string>F.Intrinsic.Control.If(V.local.sSheet.Trim,&lt;&gt;,"")</string>
+        <string>	F.Automation.OOCalc.WriteSpreadsheet(V.Global.sFile,"",False,V.Local.sSheet)</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	F.Intrinsic.Debug.SetLA("No data was passed to be written. Ending program.")</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>F.Intrinsic.Debug.ToggleOutputListing</string>
+        <string>F.Intrinsic.Debug.DumpVariableList</string>
+        <string />
+        <string />
+        <string>F.Intrinsic.String.Build("Custom Open Orders XLS Report has been created. {0}{0}File path: {0}{1}",Variable.Ambient.NewLine,V.Global.sFile, V.Local.sFin)</string>
+        <string>F.Intrinsic.UI.Msgbox(V.Local.sFin, "Process Complete")</string>
+        <string />
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("OOffice_Create_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.Debug.SetLA(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>Program.Sub.OOffice_Create.End</string>
+        <string />
+        <string>Program.Sub.Get_Orders.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Get_Orders_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>'lets populate our udt for information</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sSQL.Declare(String)</string>
+        <string>V.Local.iC.Declare(Long)</string>
+        <string>V.local.iUB.Declare(Long)</string>
+        <string>V.Local.sDateFormat.Declare(String)</string>
+        <string>V.Local.bExists.Declare(Boolean)</string>
+        <string />
+        <string>'format our file name</string>
+        <string>V.Local.sDateFormat.Set(V.Ambient.Date)</string>
+        <string>F.Intrinsic.String.Concat(V.Caller.GlobalDir,"\Open_Orders\",V.local.sDateFormat.FormatYYYYMMDD,"_OPENORDER.xls",V.Global.sFile)</string>
+        <string>F.Intrinsic.File.Exists(V.Global.sFile,V.Local.bExists)</string>
+        <string>F.Intrinsic.Control.If(V.Local.bExists,=,True)</string>
+        <string>	F.Intrinsic.File.DeleteFile(V.global.sFile)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string />
+        <string>'get our price categories from the master table</string>
+        <string>F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst","Select Key_Area AS Price_Category,DESCR From V_Price_Cat_Disc")</string>
+        <string>F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,&lt;&gt;,True)</string>
+        <string>	F.Intrinsic.Variable.LoadUDTFromRecordset("conX","Rst","v.uglobal.uPriceCat",False)</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	F.Intrinsic.Debug.SetLA("No Price Categories found. Continue with program.")</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string>F.ODBC.conX!rst.Close</string>
+        <string />
+        <string>'Get Our Map information from the custom table</string>
+        <string>V.Local.sSQL.Set("Select * From GCG_3910_OO_XLS_Map Order By Column_Header,Code_Location,Code_PL")</string>
+        <string>F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sSQL)</string>
+        <string>F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,&lt;&gt;,True)</string>
+        <string>	F.Intrinsic.Variable.LoadUDTFromRecordset("conX","RST","v.uglobal.uMap",False)</string>
+        <string>	F.ODBC.conX!rst.Close</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	'meaning they havent set up their table</string>
+        <string>	F.Intrinsic.Debug.SetLA("No records have been set up for use with spreadsheet. Ending process.")</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>'Get Distinct Locaitons to be used with details and summary build</string>
+        <string>V.Local.sSQL.Set("Select Distinct Code_Location From GCG_3910_OO_XLS_Map Order By Code_Location")</string>
+        <string>F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sSQL)</string>
+        <string>F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,&lt;&gt;,True)</string>
+        <string>	F.Intrinsic.Variable.LoadUDTFromRecordset("conX","RST","v.uglobal.uLocations",False)</string>
+        <string>	F.ODBC.conX!rst.Close</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	'meaning they havent set up their table</string>
+        <string>	F.Intrinsic.Debug.SetLA("No Location records have been set up for use with spreadsheet. Ending process.")</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>'grab only order lines whose product_line is found within our custom map table</string>
+        <string>V.local.sSQL.Set("Select Order_NO,Date_Order,Product_Line, Extension_Order,LOCATION From Order_Lines Where Product_Line In(Select Code_PL From GCG_3910_OO_XLS_Map) AND LOCATION IN (SELECT DISTINCT CODE_LOCATION FROM GCG_3910_OO_XLS_MAP) And Record_Type = 'L' Order By Date_Order Desc")</string>
+        <string>F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sSQL)</string>
+        <string>F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,&lt;&gt;,True)</string>
+        <string>	F.Intrinsic.Variable.LoadUDTFromRecordset("conX","Rst","v.uglobal.uOpenOrders",False)</string>
+        <string>	F.ODBC.conX!rst.Close</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	F.Intrinsic.Debug.SetLA("No Orders matching Product Line criteria have been found.")</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>'GO THROUGH OUR OPEN ORDER UDT, WITH ALL ORDERS WE ARE PAYING ATTENTION TO, THEN QUERY THE ORDER_HEADER INFO LOOKING FOR PRICE_cATEGORY FIELD'</string>
+        <string>F.Intrinsic.Control.For(V.Local.iC,V.uGlobal.uOpenOrders.LBound,V.uGlobal.uOpenOrders.UBound,1)</string>
+        <string>	F.Intrinsic.String.Concat("Select Price_Category, Date_Order, Order_No From V_Order_Header Where Record_Type = 'A'  And Price_Category &lt;&gt; '' And Order_No = '",V.uGlobal.uOpenOrders(v.Local.iC)!Order_No,"'",V.Local.sSQL)</string>
+        <string>	F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sSQL)</string>
+        <string>	F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,&lt;&gt;,True)</string>
+        <string>		F.Intrinsic.Control.If(V.uGlobal.uPriceCat_OrderH.UBound,=,-1)</string>
+        <string>			V.Local.iUB.Set(0)</string>
+        <string>			V.uGlobal.uPriceCat_OrderH.Redim(0,V.Local.iUB)</string>
+        <string>		F.Intrinsic.Control.Else</string>
+        <string>			F.Intrinsic.Math.Add(V.uGlobal.uPriceCat_OrderH.UBound,1,V.Local.iUB)</string>
+        <string>			V.uGlobal.uPriceCat_OrderH.RedimPreserve(0,V.Local.iUB)</string>
+        <string>		F.Intrinsic.Control.EndIf</string>
+        <string>		V.Local.sDateFormat.Set(V.ODBC.conX!rst.FieldValTrim!date_Order)</string>
+        <string>		F.Intrinsic.String.Format(V.Local.sDateFormat,"YYYYMMDD",V.Local.sDateFormat)</string>
+        <string>		V.uGlobal.uPriceCat_OrderH(v.Local.iUB)!Date_Order.Set(V.Local.sDateFormat)</string>
+        <string>		V.uGlobal.uPriceCat_OrderH(v.Local.iUB)!Order_No.Set(V.uGlobal.uOpenOrders(v.Local.iC)!Order_No)</string>
+        <string>		V.uGlobal.uPriceCat_OrderH(v.Local.iUB)!Price_Cat.Set(V.ODBC.conX!rst.FieldValTrim!Price_Category)</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string>F.ODBC.conX!rst.Close</string>
+        <string>F.Intrinsic.Control.Next(V.Local.iC)</string>
+        <string>'remove dups against all three informations</string>
+        <string>F.Intrinsic.Variable.UDTMultiFlagDuplicates(V.uGlobal.uPriceCat_OrderH!Date_Order,V.uGlobal.uPriceCat_OrderH!Order_No,V.uGlobal.uPriceCat_OrderH!Price_Cat)</string>
+        <string>F.Intrinsic.Variable.UDTDeleteFlagged(V.uGlobal.uPriceCat_OrderH)</string>
+        <string>F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uPriceCat_OrderH!Date_Order,True)</string>
+        <string />
+        <string />
+        <string>F.Intrinsic.Control.CallSub(Writespreadsheet)</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Get_Orders_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.Debug.SetLA(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string />
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>Program.Sub.Get_Orders.End</string>
+        <string />
+        <string>Program.Sub.WriteSpreadsheet.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("WriteSpreadsheet_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>'this sub will go through our open orders and sum up each order lines product line amount</string>
+        <string>'to be used with the sheet_summary sub</string>
+        <string />
+        <string />
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.iC.Declare(Long)</string>
+        <string>V.Local.sRet.Declare(String)</string>
+        <string>V.Local.iDateCount.Declare(Long)</string>
+        <string>V.Local.fExtensionTotal.Declare(Float)</string>
+        <string>V.Local.iProdLineCount.Declare(Long)</string>
+        <string>V.Local.iUB.Declare(Long)</string>
+        <string>'order our udt's</string>
+        <string>'date order for OpenOrders, will determine what we need</string>
+        <string>'F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uOpenOrders!Date_Order,True)</string>
+        <string>F.Intrinsic.Variable.UDTCopy(V.uGlobal.uOpenOrders,V.uGlobal.uCPY_OpenOrders,False)</string>
+        <string>F.Intrinsic.Variable.UDTMultiFlagDuplicates(V.uGlobal.uCPY_OpenOrders!Date_Order)</string>
+        <string>F.Intrinsic.Variable.UDTDeleteFlagged(V.uglobal.uCPY_OpenOrders)</string>
+        <string>F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uCPY_OpenOrders!Date_Order,True)</string>
+        <string />
+        <string>'go through our product line map, for each specific product line.</string>
+        <string>F.Intrinsic.Control.For(V.Local.iProdLineCount,V.uGlobal.uMap.LBound,V.uGlobal.uMap.UBound,1)</string>
+        <string>	'loop through our date copy udt for specific dates and then sum our udt</string>
+        <string>	F.Intrinsic.Control.For(V.Local.iDateCount,V.uGlobal.uCPY_OpenOrders.LBound,V.uGlobal.uCPY_OpenOrders.UBound,1)</string>
+        <string>		'here is where we will get our PL from iProdLineCount, and our specfic date from iDateCount</string>
+        <string>'</string>
+        <string>'</string>
+        <string>		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uOpenOrders!PL,V.uGlobal.uMap(v.Local.iProdLineCount)!Code_PL,V.uGlobal.uOpenOrders!Date_Order,V.uGlobal.uCPY_OpenOrders(v.Local.iDateCount)!Date_Order,V.uGlobal.uOpenOrders!LOCATION,V.uGlobal.uCPY_OpenOrders(V.Local.iDateCount)!LOCATION,V.Local.sRet)</string>
+        <string>		'only care about if if we have a return, otherwise it will be zero and won't be included</string>
+        <string>		F.Intrinsic.Control.If(V.Local.sRet,&lt;&gt;,"")</string>
+        <string>			F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)</string>
+        <string>			F.Intrinsic.Control.For(V.Local.iC,V.Local.sRet.LBound,V.Local.sRet.UBound,1)</string>
+        <string />
+        <string>				'SO FOR EACH RETURN WE ARE GOING TO KEEP A TRACK OF OUR SUM AND STORE IN FEXTENSIONTOTAL VARIABLE</string>
+        <string>				F.Intrinsic.Math.Add(V.Local.fExtensionTotal,V.uGlobal.uOpenOrders(v.Local.sRet(v.Local.iC))!Extension,V.Local.fExtensionTotal)</string>
+        <string />
+        <string>			F.Intrinsic.Control.Next(V.Local.iC)</string>
+        <string>			'stor our date, pl, and extension amount into our udt.</string>
+        <string>			F.Intrinsic.Control.If(V.uGlobal.uExtTotals.UBound,&lt;,0)</string>
+        <string>				V.Local.iUB.Set(0)</string>
+        <string>				V.uGlobal.uExtTotals.Redim(0,V.Local.iUB)</string>
+        <string>			F.Intrinsic.Control.Else</string>
+        <string>				F.Intrinsic.Math.Add(V.uGlobal.uExtTotals.UBound,1,V.Local.iUB)</string>
+        <string>				V.uGlobal.uExtTotals.RedimPreserve(0,V.Local.iUB)</string>
+        <string>			F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>			'set our info to the uExtTotals udt</string>
+        <string>			V.uGlobal.uExtTotals(v.Local.iUB)!Date_Order.Set(V.uGlobal.uCPY_OpenOrders(v.Local.iDateCount)!Date_Order)</string>
+        <string>			V.uGlobal.uExtTotals(v.Local.iUB)!PL.Set(V.uGlobal.uMap(v.Local.iProdLineCount)!Code_PL)</string>
+        <string>			V.uGlobal.uExtTotals(v.Local.iUB)!Total_Ext.Set(V.Local.fExtensionTotal)</string>
+        <string>			'once we stored our extension total, clear out</string>
+        <string>			V.Local.fExtensionTotal.Set(0)</string>
+        <string>		F.Intrinsic.Control.Endif</string>
+        <string>	F.Intrinsic.Control.Next(V.Local.iDateCount)</string>
+        <string>F.Intrinsic.Control.Next(V.Local.iProdLineCount)</string>
+        <string />
+        <string>F.Intrinsic.Control.CallSub(Sheet_summary)</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("WriteSpreadsheet_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.Debug.SetLA(V.Local.sError)</string>
+        <string>	F.Intrinsic.control.CallSub(Unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>Program.Sub.WriteSpreadsheet.End</string>
+        <string />
+        <string>Program.Sub.Diff_Backlog_Calc.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Diff_BackLog_Calc_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string />
+        <string>'sub routine that will figure out our difference from the most recent two order dates</string>
+        <string>'and do the %backlog, which will be the column total/Grand Total</string>
+        <string />
+        <string>V.Local.sDiff.Declare(String)</string>
+        <string>V.Local.sDiff1.Declare(String)</string>
+        <string>V.Local.sDiff2.Declare(String)</string>
+        <string>V.Local.sBackLog.Declare(String)</string>
+        <string>V.Local.fBackLog.Declare(Float)</string>
+        <string>V.Local.fGrand.Declare(Float)</string>
+        <string>V.Local.iCount.Declare(Long)</string>
+        <string>V.Local.fDiff.Declare(Float)</string>
+        <string />
+        <string>V.Local.sDiff1.Set(V.Args.Diff1)</string>
+        <string>V.Local.sDiff2.Set(V.Args.Diff2)</string>
+        <string>V.Local.fGrand.Set(V.Args.Grand)</string>
+        <string />
+        <string>'Go Through our two difference rows</string>
+        <string>F.Intrinsic.String.Split(V.Local.sDiff1,"*!*",V.Local.sDiff1)</string>
+        <string>F.Intrinsic.String.Split(V.Local.sDiff2,"*!*",V.Local.sDiff2)</string>
+        <string />
+        <string>F.Intrinsic.Control.For(V.Local.iCount,V.Local.sDiff1.lbound,V.Local.sDiff1.UBound,1)</string>
+        <string>	F.Intrinsic.Math.Sub(V.Local.sDiff1(v.Local.iCount),V.Local.sDiff2(v.Local.iCount),V.Local.fDiff)</string>
+        <string>	F.Intrinsic.Math.Div(V.Local.sDiff1(v.Local.iCount),V.Local.fGrand,V.Local.fBackLog)</string>
+        <string>	F.Intrinsic.Math.Round(V.Local.fBackLog,2,V.Local.fBackLog)</string>
+        <string>	F.Intrinsic.Math.Mult(V.Local.fBackLog,100,V.Local.fBackLog)</string>
+        <string>	F.Intrinsic.Control.If(V.Local.sDiff.Trim,=,"")</string>
+        <string>		V.Local.sDiff.Set(V.Local.fDiff)</string>
+        <string>	F.Intrinsic.Control.Else</string>
+        <string>		F.Intrinsic.String.Concat(V.Local.sDiff,"*!*",V.Local.fDiff,V.Local.sDiff)</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string>	F.Intrinsic.Control.If(V.Local.sBackLog.Trim,=,"")</string>
+        <string>		V.Local.sBackLog.Set(V.Local.fBackLog)</string>
+        <string>	F.Intrinsic.Control.Else</string>
+        <string>		F.Intrinsic.String.Concat(V.Local.sBackLog,"*!*",V.Local.fBackLog,V.Local.sBackLog)</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string>F.Intrinsic.Control.Next(V.Local.iCount)</string>
+        <string />
+        <string>F.Intrinsic.Variable.AddRV("sDiff",V.Local.sDiff)</string>
+        <string>F.Intrinsic.Variable.AddRV("sBackLog",V.Local.sBackLog)</string>
+        <string />
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Diff_BackLog_Calc_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.Debug.SetLA(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>Program.Sub.Diff_Backlog_Calc.End</string>
+        <string />
+        <string>Program.Sub.Sheet_Summary.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Sheet_Summary_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>'Here is where we will build the summary sheet of the spreadsheet.</string>
+        <string>'first row will be the column_names from the uMap udt</string>
+        <string>'then each following row will begin with the date of orders, then the totals of each column.</string>
+        <string>'the PL's are set up through the GCG_OO_XLS_Map table, so for each column we may have multiple PL's, have to do a running total</string>
+        <string>'for each PL's from our Map against our column header we will total up, then write a column data</string>
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sRet.Declare(String)</string>
+        <string>V.local.sCol.Declare(String)</string>
+        <string>V.Local.sCols.Declare(String)</string>
+        <string>V.Local.sHeader.Declare(String)</string>
+        <string>V.Local.sAmounts.Declare(String)</string>
+        <string>V.Local.sLoc.Declare(String)</string>
+        <string>V.Local.sRow.Declare(String)</string>
+        <string>V.Local.sSheet.Declare(String)</string>
+        <string>V.Local.sDate.Declare(String)</string>
+        <string>V.Local.dDate.Declare(Date)</string>
+        <string>V.Local.sDiff.Declare(String)</string>
+        <string>V.Local.sDiff1.Declare(String)</string>
+        <string>V.Local.sDiff2.Declare(String)</string>
+        <string>V.Local.sGrand.Declare(String)</string>
+        <string>V.Local.sBacklog.Declare(String)</string>
+        <string />
+        <string />
+        <string />
+        <string>V.Local.fTotal.Declare(Float)</string>
+        <string>V.Local.fLocTotal.Declare(Float)</string>
+        <string>V.Local.fGrandTotal.Declare(Float)</string>
+        <string>V.Local.fTopGrand.Declare(Float)</string>
+        <string>V.Local.fDiff1.Declare(Float)</string>
+        <string>V.Local.fDiff2.Declare(Float)</string>
+        <string>V.Local.fDiff.Declare(Float)</string>
+        <string />
+        <string>V.Local.iR.Declare(Long)</string>
+        <string>V.Local.iD.Declare(Long)</string>
+        <string>V.Local.iL.Declare(Long)</string>
+        <string>V.Local.iPL.Declare(Long)</string>
+        <string>V.Local.iC.Declare(Long)</string>
+        <string>V.Local.iA.Declare(Long)</string>
+        <string />
+        <string />
+        <string />
+        <string>'need to loop through my column map product lines based off of my columns?</string>
+        <string>'First our Column header</string>
+        <string>'we have to copy of udt from our original map, to our udt copy</string>
+        <string>F.Intrinsic.Variable.UDTCopy(V.uGlobal.uMap,V.uGlobal.uMapCopy,False)</string>
+        <string>'delete our multiple column_header information, cause we will have it.</string>
+        <string>F.Intrinsic.Variable.UDTMultiFlagDuplicates(V.uGlobal.uMapCopy!Col_Header)</string>
+        <string>F.Intrinsic.Variable.UDTDeleteFlagged(V.uGlobal.uMapCopy)</string>
+        <string>F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uMapCopy!Col_Header,False)</string>
+        <string>F.Intrinsic.Control.For(V.Local.iC,V.uGlobal.uMapCopy.LBound,V.uGlobal.uMapCopy.UBound,1)</string>
+        <string>	F.Intrinsic.Control.If(V.Local.sCol.Trim,=,"")</string>
+        <string>		V.Local.sCol.Set(V.uGlobal.uMapCopy(v.Local.iC)!Col_Header)</string>
+        <string>	F.Intrinsic.Control.Else</string>
+        <string>		F.Intrinsic.String.Concat(V.Local.sCol,"*!*",V.uGlobal.uMapCopy(v.Local.iC)!Col_Header,V.Local.sCol)</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string>F.Intrinsic.Control.Next(V.Local.iC)</string>
+        <string>'</string>
+        <string />
+        <string>'set our columnes</string>
+        <string>'then include our header row with information for order date</string>
+        <string>'sheader includes our order date text, columns, and our locations</string>
+        <string>V.Local.sHeader.Set(V.local.scol)</string>
+        <string>'store our  col into scols and split scols</string>
+        <string />
+        <string>F.Intrinsic.String.Concat("Order Date*!*",V.Local.sHeader,V.Local.sHeader)</string>
+        <string>'F.Intrinsic.Control.for(V.local.ic,V.uglobal.ulocations.lbound,V.uglobal.ulocations.ubound,1)</string>
+        <string>'	F.Intrinsic.String.Concat(V.Local.sHeader,"*!*",V.uGlobal.uLocations(v.Local.iC)!Location,V.Local.sHeader)</string>
+        <string>'F.Intrinsic.Control.Next(V.Local.iC)</string>
+        <string>F.Intrinsic.Control.For(V.Local.iL,V.uGlobal.uLocations.LBound,V.uGlobal.uLocations.UBound,1)</string>
+        <string>	F.Intrinsic.String.Concat(V.Local.sHeader,"*!*",V.uGlobal.uLocations(v.Local.iL)!Location,V.Local.sHeader)</string>
+        <string>F.Intrinsic.Control.next(V.local.il)</string>
+        <string />
+        <string>F.Intrinsic.String.Concat(V.Local.sHeader,"*!*","Grand Total",V.Local.sHeader)</string>
+        <string />
+        <string />
+        <string />
+        <string />
+        <string>'still go through our particular dates</string>
+        <string>F.Intrinsic.Control.For(V.Local.iD,V.uGlobal.uCPY_OpenOrders!Date_Order.LBound,V.uGlobal.uCPY_OpenOrders!Date_Order.Ubound,1)</string>
+        <string>''scolstoresourcolumnheader</string>
+        <string>	F.Intrinsic.String.Split(V.Local.sCol,"*!*",V.Local.sCols)</string>
+        <string>	F.Intrinsic.Control.For(V.Local.iC,V.Local.sCols.LBound,V.Local.sCols.UBound,1)</string>
+        <string>	'	look  in our map udt for the prod lines that go with our col</string>
+        <string>		'got to look in our uMap for our particular product lines that go within our column, 'this will return us values that have the column header we need</string>
+        <string>		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uMap!Col_Header,V.Local.sCols(v.Local.iC),V.Local.sRet)</string>
+        <string>		F.Intrinsic.Control.If(V.Local.sRet.Trim,&lt;&gt;,"")</string>
+        <string>			F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)</string>
+        <string>			F.Intrinsic.Control.For(V.Local.iR,V.Local.sRet.LBound,V.Local.sRet.UBound,1)</string>
+        <string>				'now we have our product lines, so go through our extentions udt with the basis of our date order, and our product line loop</string>
+        <string>				F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uExtTotals!Date_Order,V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,V.uGlobal.uExtTotals!PL,V.uGlobal.uMap(v.Local.sRet(v.Local.iR))!Code_PL,V.Local.sAmounts)</string>
+        <string>				F.Intrinsic.Control.If(V.Local.sAmounts.Trim,&lt;&gt;,"")</string>
+        <string>					F.Intrinsic.String.Split(V.Local.sAmounts,"*!*",V.Local.sAmounts)</string>
+        <string>					F.Intrinsic.Control.For(V.Local.iA,V.Local.sAmounts.LBound,V.Local.sAmounts.UBound,1)</string>
+        <string>						F.Intrinsic.Math.Add(V.LocaL.fTotal,V.uGlobal.uExtTotals(v.Local.sAmounts(v.Local.iA))!Total_Ext,V.Local.fTotal)</string>
+        <string>					'amounts counter for sAmounts that will store our extensions</string>
+        <string>					F.Intrinsic.Control.Next(V.Local.iA)</string>
+        <string>'				F.Intrinsic.Control.Else</string>
+        <string>'					V.Local.fTotal.Set(0)</string>
+        <string>				'sAmount trim endif not equal to blank</string>
+        <string>				F.Intrinsic.Control.EndIf</string>
+        <string>			'our sRet counter for our column header pl's that are contained in the column</string>
+        <string>			F.Intrinsic.Control.Next(V.Local.iR)</string>
+        <string>		'sret end if</string>
+        <string>		F.Intrinsic.Control.Endif</string>
+        <string>		'add our total to a grand total column for later use</string>
+        <string>		F.Intrinsic.Math.Add(V.Local.fGrandTotal,V.Local.fTotal,V.Local.fGrandTotal)</string>
+        <string>		F.Intrinsic.Control.If(V.Local.sRow.Trim,=,"")</string>
+        <string>			V.Local.sDate.Set(V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order)</string>
+        <string>			F.Intrinsic.Date.ConvertDString(V.Local.sDate,"YYYYMMDD",V.Local.dDate)</string>
+        <string>			F.Intrinsic.String.Format(V.Local.dDate,"MM-DD-YYYY",V.Local.sDate)</string>
+        <string>'			f.Intrinsic.Date.ConvertDString(</string>
+        <string>'			F.Intrinsic.String.Concat(V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,"*!*",V.Local.fTotal,V.Local.sRow)</string>
+        <string>'			putting a tick mark before our date string so it will stay the date in the spreadsheet</string>
+        <string>			F.Intrinsic.String.Concat("'",V.Local.sDate,"*!*",V.Local.fTotal,V.Local.sRow)</string>
+        <string>		F.Intrinsic.Control.Else</string>
+        <string>			F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.local.fTotal,V.Local.sRow)</string>
+        <string>		F.Intrinsic.Control.EndIf</string>
+        <string>		'we have to keep track of the first two dates for the idfference at the end of the spreadsheet</string>
+        <string>		'it will be most recent order against the second most recent</string>
+        <string>		F.Intrinsic.Control.If(V.Local.iD,=,0)</string>
+        <string>			F.Intrinsic.Control.If(V.Local.sDiff1.Trim,=,"")</string>
+        <string>				V.Local.sDiff1.Set(V.Local.fTotal)</string>
+        <string>			F.Intrinsic.Control.Else</string>
+        <string>				F.Intrinsic.String.Concat(V.Local.sDiff1,"*!*",V.Local.fTotal,V.Local.sDiff1)</string>
+        <string>			F.Intrinsic.Control.EndIf</string>
+        <string>		F.Intrinsic.Control.ElseIf(V.Local.iD,=,1)</string>
+        <string>			F.Intrinsic.Control.If(V.Local.sDiff2.Trim,=,"")</string>
+        <string>				V.Local.sDiff2.set(V.Local.fTotal)</string>
+        <string>			F.Intrinsic.Control.Else</string>
+        <string>				F.Intrinsic.String.Concat(V.Local.sDiff2,"*!*",V.Local.fTotal,V.Local.sDiff2)</string>
+        <string>			F.Intrinsic.Control.EndIf</string>
+        <string>		F.Intrinsic.Control.EndIf</string>
+        <string>		V.Local.fTotal.Set(0.00)</string>
+        <string>	'scol counter for our column names	</string>
+        <string>	F.Intrinsic.Control.Next(V.Local.iC)</string>
+        <string>	'when we have written all our column, we also have to write our location totals. doing the same above, based on column header, but this time returned location values whose product lines are included in that location</string>
+        <string>	F.Intrinsic.Control.For(V.Local.iL,V.uGlobal.uLocations.LBound,V.uGlobal.uLocations.UBound,1)</string>
+        <string>		'concat this locaiton to our header row so we know which location we are on.</string>
+        <string>		'look through our map udt for our locations in the map, to get the pl's that belong in that location</string>
+        <string>		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uMap!Code_Location,V.uGlobal.uLocations(v.Local.iL)!Location,V.Local.sRet)</string>
+        <string>		F.Intrinsic.Control.If(V.Local.sRet.Trim,&lt;&gt;,"")</string>
+        <string>			'we are going to split our sret</string>
+        <string>			F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)</string>
+        <string>			F.Intrinsic.Control.For(V.Local.iR,V.Local.sRet.LBound,V.Local.sRet.UBound,1)</string>
+        <string>				F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uExtTotals!Date_Order,V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,V.uGlobal.uExtTotals!PL,V.uGlobal.uMap(v.Local.sRet(v.Local.iR))!Code_PL,V.Local.sAmounts)</string>
+        <string>				F.Intrinsic.control.If(V.Local.sAmounts.Trim,&lt;&gt;,"")</string>
+        <string>					F.Intrinsic.String.Split(V.Local.sAmounts,"*!*",V.Local.sAmounts)</string>
+        <string>			F.Intrinsic.Control.For(V.Local.iA,V.Local.sAmounts.LBound,V.Local.sAmounts.UBound,1)</string>
+        <string>				F.Intrinsic.Math.Add(V.Local.fLocTotal,V.uGlobal.uExtTotals(v.Local.sAmounts(v.Local.iA))!Total_Ext,V.Local.fLocTotal)</string>
+        <string>			F.Intrinsic.Control.Next(V.Local.iA)</string>
+        <string>				F.Intrinsic.Control.EndIf</string>
+        <string>			'count for our returned pls that have that location</string>
+        <string>			F.Intrinsic.Control.Next(V.Local.iR)</string>
+        <string>		F.Intrinsic.Control.Else</string>
+        <string>		F.Intrinsic.Control.EndIf</string>
+        <string>		'concat our locations to our row</string>
+        <string>		F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fLocTotal,V.Local.sRow)</string>
+        <string>		'we have to keep track of the first two dates for the idfference at the end of the spreadsheet</string>
+        <string>		'it will be most recent order against the second most recent</string>
+        <string>		F.Intrinsic.Control.If(V.Local.iD,=,0)</string>
+        <string>			F.Intrinsic.Control.If(V.Local.sDiff1.Trim,=,"")</string>
+        <string>				V.Local.sDiff1.Set(V.Local.fLocTotal)</string>
+        <string>			F.Intrinsic.Control.Else</string>
+        <string>				F.Intrinsic.String.Concat(V.Local.sDiff1,"*!*",V.Local.fLocTotal,V.Local.sDiff1)</string>
+        <string>			F.Intrinsic.Control.EndIf</string>
+        <string>		F.Intrinsic.Control.ElseIf(V.Local.iD,=,1)</string>
+        <string>			F.Intrinsic.Control.If(V.Local.sDiff2.Trim,=,"")</string>
+        <string>				V.Local.sDiff2.set(V.Local.fLocTotal)</string>
+        <string>			F.Intrinsic.Control.Else</string>
+        <string>				F.Intrinsic.String.Concat(V.Local.sDiff2,"*!*",V.Local.fLocTotal,V.Local.sDiff2)</string>
+        <string>			F.Intrinsic.Control.EndIf</string>
+        <string>		F.Intrinsic.Control.EndIf</string>
+        <string>		V.Local.fLocTotal.Set(0.00)</string>
+        <string>	'locations udt counter</string>
+        <string>	F.Intrinsic.Control.Next(V.Local.iL)</string>
+        <string />
+        <string>'	put our grand total in there</string>
+        <string>	F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fGrandTotal,V.Local.sRow)</string>
+        <string>		F.Intrinsic.Control.If(V.Local.iD,=,0)</string>
+        <string>			V.Local.fTopGrand.Set(V.Local.fGrandTotal)</string>
+        <string>			F.Intrinsic.Control.If(V.Local.sDiff1.Trim,=,"")</string>
+        <string>'				V.Local.sDiff1.Set(V.Local.fLocTotal)</string>
+        <string>			F.Intrinsic.Control.Else</string>
+        <string>				F.Intrinsic.String.Concat(V.Local.sDiff1,"*!*",V.Local.fGrandTotal,V.Local.sDiff1)</string>
+        <string>			F.Intrinsic.Control.EndIf</string>
+        <string>		F.Intrinsic.Control.ElseIf(V.Local.iD,=,1)</string>
+        <string>			F.Intrinsic.Control.If(V.Local.sDiff2.Trim,=,"")</string>
+        <string>'				V.Local.sDiff2.set(V.Local.fLocTotal)</string>
+        <string>		F.Intrinsic.Control.Else</string>
+        <string>			F.Intrinsic.String.Concat(V.Local.sDiff2,"*!*",V.Local.fGrandTotal,V.Local.sDiff2)</string>
+        <string>		F.Intrinsic.Control.EndIf</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string>	'so for every time we go through all our columns we are going to store srow in ssheet, delimit by $!$, then clear out srow</string>
+        <string>	F.Intrinsic.Control.If(V.Local.sSheet.Trim,=,"")</string>
+        <string>		V.Local.sSheet.Set(V.Local.sRow)</string>
+        <string>	F.Intrinsic.Control.Else</string>
+        <string>		F.Intrinsic.String.Concat(V.Local.sSheet,"$!$",V.Local.sRow,V.Local.sSheet)</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string>	V.Local.sRow.Set("")</string>
+        <string>	V.Local.fGrandTotal.Set(0.00)</string>
+        <string>'datecounteruCPYdate</string>
+        <string>F.Intrinsic.Control.Next(V.Local.iD)</string>
+        <string />
+        <string>F.Intrinsic.String.Concat(V.Local.sHeader,"$!$",V.Local.sSheet,V.Local.sSheet)</string>
+        <string>'</string>
+        <string>'call the Diff_Backlog sub to calc our difference and backlog</string>
+        <string>F.Intrinsic.Control.CallSub(Diff_backlog_calc,"Diff1",V.Local.sDiff1,"Diff2",V.Local.sDiff2,"Grand",V.Local.fTopGrand)</string>
+        <string>'concat these two values to the end of our sheet</string>
+        <string>V.Local.sDiff.Set(V.Args.sDiff)</string>
+        <string>V.Local.sBacklog.Set(V.Args.sBacklog)</string>
+        <string>F.Intrinsic.String.Concat(V.Local.ssheet,"$!$$!$Difference:*!*",V.Local.sDiff,"$!$Backlog %:*!*",V.Local.sBacklog,V.Local.sSheet)</string>
+        <string />
+        <string />
+        <string>'passing scol becuase all that includes is our particluar column names that we want to pay attention to, for now</string>
+        <string>F.Intrinsic.Control.CallSub(Sheet_details,"Col",V.local.sCol,"sSheet",V.Local.sSheet)</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Sheet_Summary_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.Debug.SetLA(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>Program.Sub.Sheet_Summary.End</string>
+        <string />
+        <string>Program.Sub.Sheet_Details.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Sheet_Details_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sRet.Declare(String)</string>
+        <string>V.Local.sSheet1.Declare(String)</string>
+        <string>V.Local.sSheet.Declare(String)</string>
+        <string>V.Local.sCol.Declare(String)</string>
+        <string>V.Local.sHeader.Declare(String)</string>
+        <string>V.Local.sRow.Declare(String)</string>
+        <string>V.Local.sRetCol.Declare(String)</string>
+        <string>V.Local.sCols.Declare(String)</string>
+        <string>V.Local.sAmount.Declare(String)</string>
+        <string>V.Local.dDate.Declare(Date)</string>
+        <string>V.Local.sdate.Declare(String)</string>
+        <string />
+        <string>V.Local.iD.Declare(Long)</string>
+        <string>V.Local.iR.Declare(Long)</string>
+        <string>V.Local.iC.Declare(Long)</string>
+        <string>V.Local.iE.Declare(Long)</string>
+        <string>V.Local.iT.Declare(Long)</string>
+        <string>V.Local.iA.Declare(Long)</string>
+        <string>V.Local.iB.Declare(Long)</string>
+        <string />
+        <string />
+        <string>V.Local.fTotal.Declare(Float)</string>
+        <string />
+        <string>F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uPriceCat_OrderH!Date_Order,True)</string>
+        <string />
+        <string />
+        <string>'going to have the same amount of col</string>
+        <string>V.Local.sCol.Set(V.Args.col)</string>
+        <string>F.Intrinsic.String.Split(V.Local.sCol,"*!*",V.Local.sCols)</string>
+        <string />
+        <string>V.Local.sSheet1.Set(V.Args.sSheet)</string>
+        <string />
+        <string>'this header will be price_Category, Col array, thats all</string>
+        <string>F.Intrinsic.String.Concat("Price Category*!*",V.Local.scol,V.Local.sHeader)</string>
+        <string>'F.Intrinsic.Debug.InvokeDebugger</string>
+        <string>'F.Intrinsic.Debug.Stop</string>
+        <string />
+        <string>F.Intrinsic.Control.For(V.Local.iD,V.uGlobal.uCPY_OpenOrders!Date_Order.LBound,V.uGlobal.uCPY_OpenOrders!Date_Order.UBound,1)</string>
+        <string>	'WRITE A DATE HEADER FOR FOR EACH NEW DATE</string>
+        <string>	 F.Intrinsic.Control.If(V.Local.sRow.Trim,=,"")</string>
+        <string />
+        <string>		F.Intrinsic.Date.ConvertDString(V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,"YYYYMMDD",V.Local.dDate)</string>
+        <string>		F.Intrinsic.String.Format(V.Local.dDate,"MM-DD-YYYY",V.Local.sdate)</string>
+        <string>		F.Intrinsic.String.Concat("Order Date:",V.local.sdate,"$!$",V.Local.sRow)</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>	'also for each price category</string>
+        <string>	F.Intrinsic.Control.For(V.Local.ic,V.uGlobal.uPriceCat.LBound,V.uGlobal.uPriceCat.UBound,1)</string>
+        <string />
+        <string>		'have to write our price category for each row, will be using DESCR from uPriceCat udt</string>
+        <string>		F.Intrinsic.String.Concat(V.Local.sRow,V.uGlobal.uPriceCat(v.Local.iC)!Descr,V.Local.sRow)</string>
+        <string>		'query our orderh udt based off of our certain price category, and date order to get order_nos for our lines to use against the open order udt</string>
+        <string>		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uPriceCat_OrderH!Date_Order,V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,V.uGlobal.uPriceCat_OrderH!Price_Cat,V.uGlobal.uPriceCat(v.Local.iC)!Price_Category,V.Local.sRet)</string>
+        <string>		F.Intrinsic.Control.If(V.Local.sRet.Trim,&lt;&gt;,"")</string>
+        <string />
+        <string>			F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)</string>
+        <string>			F.Intrinsic.Control.For(V.Local.iR,V.Local.sRet.LBound,V.Local.sRet.UBound,1)</string>
+        <string>					F.Intrinsic.Control.For(V.Local.iT,V.Local.sCols.LBound,V.Local.sCols.UBound,1)</string>
+        <string>'						we have to get the product lines that are associated with the map udt sret will return us all those pl's that are associated with the column header we are on</string>
+        <string>						F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uMap!Col_Header,V.Local.sCols(v.Local.iT),V.Local.sRetCol)</string>
+        <string>						F.Intrinsic.Control.If(V.Local.sRetCol.Trim,&lt;&gt;,"")</string>
+        <string>							F.Intrinsic.String.Split(V.Local.sRetCol,"*!*",V.Local.sRetCol)</string>
+        <string>							F.Intrinsic.Control.For(V.Local.iE,V.Local.sRetCol.LBound,V.Local.sRetCol.UBound,1)</string>
+        <string>								F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uOpenOrders!Order_No,V.uGlobal.uPriceCat_orderH(v.Local.sRet(v.Local.iR))!Order_No,V.uGlobal.uOpenOrders!PL,V.uGlobal.uMap(v.Local.sRetCol(v.Local.iE))!Code_PL,V.Local.sAmount)</string>
+        <string>								 F.Intrinsic.Control.If(V.Local.sAmount.Trim,&lt;&gt;,"")</string>
+        <string>									F.Intrinsic.String.Split(V.Local.sAmount,"*!*",V.Local.sAmount)</string>
+        <string>									F.Intrinsic.Control.For(V.Local.iA,V.Local.sAmount.LBound,V.Local.sAmount.UBound,1)</string>
+        <string>										F.Intrinsic.Math.Add(V.Local.fTotal,V.uGlobal.uOpenOrders(v.Local.sAmount(v.Local.iA))!Extension,V.Local.fTotal)</string>
+        <string>									F.Intrinsic.Control.Next(V.Local.iA)</string>
+        <string>								F.Intrinsic.Control.EndIf</string>
+        <string>							F.Intrinsic.Control.Next(V.Local.iE)</string>
+        <string>						F.Intrinsic.Control.EndIf</string>
+        <string>'					F.Intrinsic.Control.If(V.Local.fTotal,&gt;,0)</string>
+        <string>'F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fTotal,V.Local.sRow)F.Intrinsic.Control.Else</string>
+        <string>'						clearoutourtotalforournextcolumn</string>
+        <string>'						havetoputazeroprecededbyasinglequotesoexcelwillnottrimitoff.F.Intrinsic.String.Concat(V.Local.sRow,"*!*'0",V.Local.sRow)F.Intrinsic.Control.EndIf</string>
+        <string>					F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fTotal,V.Local.sRow)</string>
+        <string>					V.Local.fTotal.Set(0.00)</string>
+        <string>				F.Intrinsic.Control.next(V.Local.iT)</string>
+        <string>		'count for our sret return variable that has our order no's needed</string>
+        <string>			F.Intrinsic.Control.Next(V.Local.iR)</string>
+        <string>		F.Intrinsic.Control.Else</string>
+        <string>			'got to zero fill against our column, becuase we have no orders in this date range that exist with the price category</string>
+        <string>			F.Intrinsic.Control.For(V.Local.iB,V.Local.sCols.LBound,V.Local.sCols.UBound,1)</string>
+        <string>				F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fTotal,V.Local.sRow)</string>
+        <string>			F.Intrinsic.Control.Next(V.Local.iB)</string>
+        <string>			'so we have blank totals atleast?</string>
+        <string>			'sretend if</string>
+        <string>		F.Intrinsic.Control.EndIf</string>
+        <string>'		F.Intrinsic.String.Concat(V.Local.sRow,"$!$",V.Local.sRow)</string>
+        <string>		F.Intrinsic.String.Concat(V.Local.sSheet,"$!$",V.Local.sRow,"",V.Local.sSheet)</string>
+        <string>		V.Local.sRow.Set("")</string>
+        <string>	'counter for our price category</string>
+        <string>	F.Intrinsic.Control.Next(V.Local.iC)</string>
+        <string>'splitourdateordersbyanewline</string>
+        <string>F.Intrinsic.String.Concat(V.Local.sSheet,"$!$",V.Local.sSheet)</string>
+        <string>F.Intrinsic.Control.next(V.Local.iD)</string>
+        <string />
+        <string>F.Intrinsic.String.Concat(V.Local.sSheet1,"&amp;^&amp;",V.local.sHeader,"$!$",V.Local.sSheet,V.Local.sSheet)</string>
+        <string />
+        <string />
+        <string />
+        <string>'determine which spreadsheet format we are writing to.</string>
+        <string>F.Intrinsic.Control.If(V.Global.sFileType.Trim,=,"EXCEL")</string>
+        <string>	F.Intrinsic.Control.CallSub(Excel_create,"Sheet",V.Local.sSheet)</string>
+        <string>F.Intrinsic.Control.Elseif(V.Global.sFileType.Trim,=,"OOCALC")</string>
+        <string>	F.Intrinsic.Control.CallSub(Ooffice_create,"Sheet",V.Local.sSheet)</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	'don't have either, shouldn't hit this but just in case.</string>
+        <string>	F.Intrinsic.Debug.SetLA("Excel or OO Office Equivalent not found. Ending Program.")</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Sheet_Details_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.Debug.SetLA(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(Unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>Program.Sub.Sheet_Details.End</string>
+        <string />
+        <string>Program.Sub.Comments.Start</string>
+        <string>${$0$}$$}$$}$11/1/2016 9:45:47 AM$}$False</string>
+        <string>${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Maintenance Program that is described in quote 5491.</string>
+        <string />
+        <string>Program.Sub.Comments.End</string>
+      </Lines>
+    </TextStrings>
+  </TextSource>
+  <Scrolling>
+    <WindowOriginY>373</WindowOriginY>
+    <Options>None</Options>
+  </Scrolling>
+  <Outlining>
+    <AllowOutlining>true</AllowOutlining>
+    <ImageSize>8</ImageSize>
+    <Ranges>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>0</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>1</Y>
+        </EndPoint>
+        <Text>Program.Sub.ScreenSU</Text>
+        <DisplayText>Program.Sub.ScreenSU</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>3</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>42</Y>
+        </EndPoint>
+        <Text>Program.Sub.Preflight</Text>
+        <DisplayText>Program.Sub.Preflight</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>44</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>75</Y>
+        </EndPoint>
+        <Text>Program.Sub.Main</Text>
+        <DisplayText>Program.Sub.Main</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>77</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>85</Y>
+        </EndPoint>
+        <Text>Program.Sub.Unload</Text>
+        <DisplayText>Program.Sub.Unload</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>87</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>129</Y>
+        </EndPoint>
+        <Text>Program.Sub.File_Type</Text>
+        <DisplayText>Program.Sub.File_Type</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>131</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>160</Y>
+        </EndPoint>
+        <Text>Program.Sub.Excel_Create</Text>
+        <DisplayText>Program.Sub.Excel_Create</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>162</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>196</Y>
+        </EndPoint>
+        <Text>Program.Sub.OOffice_Create</Text>
+        <DisplayText>Program.Sub.OOffice_Create</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>198</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>302</Y>
+        </EndPoint>
+        <Text>Program.Sub.Get_Orders</Text>
+        <DisplayText>Program.Sub.Get_Orders</DisplayText>
+        <Visible>true</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>304</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>375</Y>
+        </EndPoint>
+        <Text>Program.Sub.WriteSpreadsheet</Text>
+        <DisplayText>Program.Sub.WriteSpreadsheet</DisplayText>
+        <Visible>true</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>377</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>433</Y>
+        </EndPoint>
+        <Text>Program.Sub.Diff_Backlog_Calc</Text>
+        <DisplayText>Program.Sub.Diff_Backlog_Calc</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>435</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>664</Y>
+        </EndPoint>
+        <Text>Program.Sub.Sheet_Summary</Text>
+        <DisplayText>Program.Sub.Sheet_Summary</DisplayText>
+        <Visible>true</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>666</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>794</Y>
+        </EndPoint>
+        <Text>Program.Sub.Sheet_Details</Text>
+        <DisplayText>Program.Sub.Sheet_Details</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>796</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>800</Y>
+        </EndPoint>
+        <Text>Program.Sub.Comments</Text>
+        <DisplayText>Program.Sub.Comments</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+    </Ranges>
+  </Outlining>
+  <HyperText />
+  <Spelling />
+  <Braces />
+</SyntaxEdit>
