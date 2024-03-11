@@ -1,0 +1,252 @@
+Program.Sub.Preflight.Start
+V.Global.sTitles.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+V.Local.sError.Declare(String)
+
+'Dawn Hughes 9/7/2017
+'reads in values from open orders and creates an excel file, adding another row to the existing excel
+
+V.Local..BulkDeclareString(sFilePath)
+V.Local.bExist.Declare(Boolean)
+
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+'check if the excel already exists- if not create it
+
+F.Intrinsic.String.Build("{0}\PLUGINS\GAB\GAS\MasterOpenOrders.xls", V.Caller.GlobalDir, V.Local.sFilePath)
+F.Intrinsic.File.Exists(V.Local.sFilePath, V.Local.bExist)
+
+Function.Intrinsic.Control.If(V.Local.bExist, =, False)
+'create excel
+Function.Intrinsic.Control.CallSub(create_excel)
+Function.Intrinsic.Control.EndIf
+'call to load excel
+Function.Intrinsic.Control.CallSub(load_file)
+'get data and save excel
+Function.Intrinsic.Control.CallSub(add_data)
+'close program
+Function.Intrinsic.Control.CallSub(unload)
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OpenOrders_XLS.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	Function.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!con.Close
+Function.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OpenOrders_XLS.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	Function.Intrinsic.Control.End
+
+Function.Intrinsic.Control.EndIf
+Program.Sub.Unload.End
+
+Program.Sub.Create_Excel.Start
+F.Intrinsic.Control.SetErrorHandler("Create_Excel_Err")
+F.Intrinsic.Control.ClearErrors
+V.Local.sError.Declare(String)
+
+V.Local..BulkDeclareString(sFilePath, sFile, sRet, sTemp, ssql)
+V.Local.iC.Declare(Long)
+
+F.Data.DataTable.CreateFromSQL("CAT", "con", "Select Distinct rTrim(Column_Header) As Column_Header From GCG_3910_OO_XLS_Map")
+F.Intrinsic.Control.For(V.Local.iC, 0, V.DataTable.CAT.RowCount--, 1)
+	V.Local.sTemp.Set(V.DataTable.CAT(V.Local.iC).Column_Header!FieldValTrim)
+	F.Intrinsic.String.Replace(V.Local.sTemp, " ", "_", V.Local.sTemp)
+	F.Intrinsic.String.Build("Update GCG_3910_OO_XLS_Map Set Column_Header ='{0}' Where Column_Header = '{1}'", V.Local.sTemp, V.DataTable.CAT(V.Local.iC).Column_Header!FieldValTrim, V.Local.ssql)
+	F.ODBC.Connection!con.Execute(V.Local.ssql)
+F.Intrinsic.Control.Next(V.Local.iC)
+F.ODBC.Connection!con.Execute("delete from GCG_3910_OO_XLS_Map where column_Header = ''")
+F.Data.DataTable.Close("CAT")
+
+F.Data.DataTable.CreateFromSQL("PL", "con", "Select Distinct Column_Header From GCG_3910_OO_XLS_Map Order by ID")
+'create header titles- first line of excel
+V.Local.sFile.Set("Date")
+F.Intrinsic.Control.For(V.Local.iC, 0, V.DataTable.PL.RowCount--, 1)
+	F.Intrinsic.String.Build("{0}	{1}", V.Local.sFile, V.DataTable.PL(V.Local.iC).Column_Header!FieldValString, V.Local.sFile)
+F.Intrinsic.Control.Next(V.Local.iC)
+'then add the Locations
+
+F.Data.DataTable.CreateFromSQL("L", "con","Select Distinct Code_Location From GCG_3910_OO_XLS_Map")
+F.Intrinsic.Control.For(V.Local.iC, 0, V.DataTable.L.RowCount--, 1)
+	F.Intrinsic.String.Build("{0}	{1}", V.Local.sFile, V.DataTable.L(V.Local.iC).Code_Location!FieldValString, V.Local.sFile)
+F.Intrinsic.Control.Next(V.Local.iC)
+'grand total
+F.Intrinsic.String.Build("{0}	Total", V.Local.sFile,  V.Local.sFile)
+
+'master location
+F.Intrinsic.String.Build("{0}\PLUGINS\GAB\GAS\MasterOpenOrders.xls", V.Caller.GlobalDir, V.Local.sFilePath)
+Function.Intrinsic.File.String2File(V.Local.sFilePath, V.Local.sFile)
+
+F.Data.DataTable.Close("PL")
+F.Data.DataTable.Close("L")
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Label("Create_Excel_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OpenOrders_XLS.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	Function.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Create_Excel.End
+
+Program.Sub.Load_File.Start
+F.Intrinsic.Control.SetErrorHandler("Load_File_Err")
+F.Intrinsic.Control.ClearErrors
+V.Local.sError.Declare(String)
+
+'put excel into datatable
+
+V.Local..BulkDeclareString(sFilePath, sRet, sCol, sTemp, sLength, sType)
+V.Local.iC.Declare(Long)
+V.Local..BulkDeclareDate(dDate)
+
+V.Local.dDate.Set(V.Ambient.Date)
+
+F.Intrinsic.String.Build("{0}\PLUGINS\GAB\GAS\MasterOpenOrders.xls", V.Caller.GlobalDir, V.Local.sFilePath)
+
+Function.Intrinsic.File.File2String(V.Local.sFilePath, V.Local.sRet)
+
+F.Intrinsic.String.Replace(V.Local.sRet, V.Ambient.NewLine, "@!@", V.Local.sRet)
+F.Intrinsic.String.Replace(V.Local.sRet, "	", "*!*", V.Local.sRet)
+'need to split sRet for titles
+V.Local.sTemp.Set(V.Local.sRet)
+
+F.Intrinsic.String.Split(V.Local.sTemp, "@!@", V.Local.sTemp)
+F.Intrinsic.String.Replace(V.Local.sTemp(0), " ", "", V.Global.sTitles)
+'need to split sTemp(0) for length
+F.Intrinsic.String.Split(V.Local.sTemp(0), "*!*", V.Local.sLength)
+F.Intrinsic.Control.For(V.Local.iC, 0, V.Local.sLength.UBound, 1)
+	Function.Intrinsic.Control.If(V.Local.iC, =, V.Local.sLength.UBound)
+		F.Intrinsic.String.Build("{0}String", V.Local.sType, V.Local.sType)
+	Function.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("{0}String*!*", V.Local.sType, V.Local.sType)
+	Function.Intrinsic.Control.EndIf	
+F.Intrinsic.Control.Next(V.Local.iC)
+
+F.Data.DataTable.CreateFromString("D", V.Local.sRet, V.Global.sTitles , V.Local.sType,"*!*", "@!@", TRUE)
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Label("Load_File_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OpenOrders_XLS.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	Function.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Load_File.End
+
+Program.Sub.Add_Data.Start
+F.Intrinsic.Control.SetErrorHandler("Add_Data_Err")
+F.Intrinsic.Control.ClearErrors
+V.Local.sError.Declare(String)
+
+V.Local..BulkDeclareString(sFilePath, sDate, sPL, ssql, sRet, sTemp, sLoc, sTotal, sField, sFile)
+V.Local..BulkDeclareLong(iC)
+V.Local..BulkDeclareFloat(fRet)
+
+'delete empty rows
+F.Intrinsic.Control.For(V.Local.iC, 0, V.DataTable.D.RowCount--, 1)
+	F.Intrinsic.Control.If(V.DataTable.D(V.Local.iC).Date!FieldVal, =, "")
+		F.Data.DataTable.DeleteRow("D", V.Local.iC)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.iC)
+
+'get todays data and add to excel
+F.Intrinsic.String.Build("{0}\PLUGINS\GAB\GAS\MasterOpenOrders.xls", V.Caller.GlobalDir, V.Local.sFilePath)
+F.Intrinsic.String.Format(V.Ambient.Date, "MM/DD/YYYY", V.Local.sDate)
+
+'add new row to datatable
+F.Data.DataTable.AddRow("D", "Date", V.Local.sDate)
+
+F.Data.DataTable.CreateFromSQL("PL", "con", "Select * From GCG_3910_OO_XLS_Map Order by ID")
+F.Data.DataTable.CreateFromSQL("L", "con", "Select Distinct Code_Location From GCG_3910_OO_XLS_Map")
+
+F.Data.DataTable.Create("T")
+F.Data.DataTable.AddColumn("T", "LOC", "String")
+F.Data.DataTable.AddColumn("T", "Total", "Float")
+
+F.Data.DataTable.CreateFromSQL("CAT", "con", "Select Distinct rTrim(Column_Header) As Column_Header From GCG_3910_OO_XLS_Map")
+
+'adding new line
+'loop through "CAT" and get PL from "PL" then tally from order_Lines based on PL
+F.Intrinsic.Control.For(V.Local.iC, 0, V.DataTable.CAT.RowCount--, 1)
+
+	F.Intrinsic.String.Build("Select Code_Pl From GCG_3910_OO_XLS_Map Where Column_Header = '{0}' And Code_Pl <> '86'", V.DataTable.CAT(V.Local.iC).Column_Header!FieldValTrim, V.Local.ssql)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Local.ssql, V.Local.sTemp)
+	
+	F.Intrinsic.String.Replace(V.Local.sTemp, "*!*", "", V.Local.sTemp)
+	F.Intrinsic.String.Replace(V.Local.sTemp, "#$#", "','", V.Local.sTemp)
+
+	F.Intrinsic.String.Build("Select Sum(Extension) As Extension From ORDER_LINES Where Record_Type = 'L' And Product_Line In ('{0}')", V.Local.sTemp, V.Local.ssql)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Local.ssql, V.Local.sRet)
+	
+	Function.Intrinsic.Control.If(V.Local.sRet, <>, "")
+		F.Data.DataTable.SetValue("D", V.DataTable.D.RowCount--, V.DataTable.CAT(V.Local.iC).Column_Header!FieldValTrim, V.Local.sRet)
+	Function.Intrinsic.Control.Else
+		F.Data.DataTable.SetValue("D", V.DataTable.D.RowCount--, V.DataTable.CAT(V.Local.iC).Column_Header!FieldValTrim, "0.00")
+	Function.Intrinsic.Control.EndIf
+	
+	'get location 
+	F.Intrinsic.String.Build("Select Top 1 Code_Location From GCG_3910_OO_XLS_Map Where Column_Header = '{0}'", V.DataTable.CAT(V.Local.iC).Column_Header!FieldValTrim, V.Local.ssql)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Local.ssql, V.Local.sLoc)
+	'add for grand totals
+	F.Data.DataTable.AddRow("T", "LOC", V.Local.sLoc, "Total", V.Local.sRet.Float)
+	
+F.Intrinsic.Control.Next(V.Local.iC)
+
+'sum all the totals
+F.Intrinsic.Control.For(V.Local.iC, 0, V.DataTable.L.RowCount--, 1)
+	F.Intrinsic.String.Build("[LOC] = '{0}'", V.DataTable.L(V.Local.iC).Code_Location!FieldValTrim, V.Local.sLoc)
+	F.Data.DataTable.Compute("T", "Sum(Total)", V.Local.sLoc, V.Local.fRet)
+	F.Data.DataTable.SetValue("D", V.DataTable.D.RowCount--, V.DataTable.L(V.Local.iC).Code_Location!FieldValTrim, V.Local.fRet)
+F.Intrinsic.Control.Next(V.Local.iC)
+F.Data.DataTable.Compute("T", "Sum(Total)", "", V.Local.fRet)
+F.Data.DataTable.SetValue("D", V.DataTable.D.RowCount--, "Total", V.Local.fRet.String)
+
+'to string and save
+F.Data.DataView.Create("D", "D_V")
+F.Data.DataView.ToString("D", "D_V", "	", V.Ambient.NewLine, V.Local.sFile)
+
+'master loaction
+F.Intrinsic.String.Build("{0}\PLUGINS\GAB\GAS\MasterOpenOrders.xls", V.Caller.GlobalDir, V.Local.sFilePath)
+Function.Intrinsic.File.String2File(V.Local.sFilePath, V.Local.sFile)
+
+'customer location
+F.Intrinsic.String.Build("{0}\Open Orders.xls", V.Caller.GlobalDir, V.Local.sFilePath)
+Function.Intrinsic.File.String2File(V.Local.sFilePath, V.Local.sFile)
+
+
+F.Data.DataTable.Close("PL")
+F.Data.DataTable.Close("D")
+F.Data.DataTable.Close("T")
+
+F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.Label("Add_Data_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OpenOrders_XLS.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	Function.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Add_Data.End
+
+Program.Sub.Comments.Start
+${$0$}$$}$DH1$}$9/7/2017 12:50:09 PM$}$False
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Maintenance Program that is described in quote 5491.
+
+Program.Sub.Comments.End
