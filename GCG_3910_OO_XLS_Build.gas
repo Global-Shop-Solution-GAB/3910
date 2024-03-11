@@ -1,0 +1,801 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.UDT.uMap.Define("Col_Header",String,Column_header)
+Variable.UDT.uMap.Define("Code_Location",String,Code_Location)
+Variable.UDT.uMap.Define("Code_PL",String,Code_PL)
+Variable.uGlobal.uMap.Declare("uMap")
+Variable.UDT.uOpenOrders.Define("Order_No",String,Order_No)
+Variable.UDT.uOpenOrders.Define("Date_Order",String,Date_Order)
+Variable.UDT.uOpenOrders.Define("PL",String,Product_Line)
+Variable.UDT.uOpenOrders.Define("Extension",Float,Extension_Order)
+Variable.UDT.uOpenOrders.Define("LOCATION",String,Location)
+Variable.UDT.uPriceCat.Define("Price_Category",String,Price_Category)
+Variable.UDT.uPriceCat.Define("Descr",String,DESCR)
+Variable.uGlobal.uOpenOrders.Declare("uOpenOrders")
+Variable.uGlobal.uPriceCat.Declare("uPriceCat")
+Variable.UDT.uPriceCat_OrderH.Define("Order_No",String,Order_No)
+Variable.UDT.uPriceCat_OrderH.Define("Price_Cat",String,Price_Category)
+Variable.UDT.uPriceCat_OrderH.Define("Date_Order",String,Date_Order)
+Variable.uGlobal.uPriceCat_OrderH.Declare("uPriceCat_OrderH")
+Variable.Global.sFileType.Declare(String)
+Variable.UDT.uMapCopy.Define("Col_Header",String,Column_Header)
+Variable.UDT.uMapCopy.Define("Code_Location",String,Code_Location)
+Variable.UDT.uMapCopy.Define("Code_PL",String,Code_PL)
+Variable.uGlobal.uMapCopy.Declare("uMapCopy")
+Variable.UDT.uCPY_OpenOrders.Define("Order_No",String,Order_No)
+Variable.UDT.uCPY_OpenOrders.Define("Date_Order",String,Date_Order)
+Variable.UDT.uCPY_OpenOrders.Define("PL",String,Product_Line)
+Variable.UDT.uCPY_OpenOrders.Define("Extension",Float,Extension)
+Variable.UDT.uCPY_OpenOrders.Define("LOCATION",String,Location)
+Variable.uGlobal.uCPY_OpenOrders.Declare("uCPY_OpenOrders")
+Variable.UDT.uColumn_Names.Define("sColumn_Header",String,Column_Header)
+Variable.uGlobal.uColumn_Names.Declare("uColumn_Names")
+Variable.UDT.uExtTotals.Define("Date_Order",String,Date_Order)
+Variable.UDT.uExtTotals.Define("PL",String,Product_Line)
+Variable.UDT.uExtTotals.Define("Total_Ext",Float,Total_Extension)
+Variable.uGlobal.uExtTotals.Declare("uExtTotals")
+Variable.UDT.uLocations.Define("Location",String,Code_Location)
+Variable.uGlobal.uLocations.Declare("uLocations")
+Variable.Global.sFile.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Quote 4849
+'Simpson Performance Products( Original)
+
+'coded by TRT
+'11/25/13
+
+'
+
+V.Local.bRet.Declare(Boolean)
+
+'open our conneciton
+F.ODBC.Connection!conX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+V.uGlobal.uMap.Redim(-1,-1)
+V.uGlobal.uOpenOrders.Redim(-1,-1)
+V.uGlobal.uPriceCat.Redim(-1,-1)
+V.uGlobal.uPriceCat_OrderH.Redim(-1,-1)
+V.uGlobal.uExtTotals.Redim(-1,-1)
+V.uGlobal.uLocations.Redim(-1,-1)
+
+
+F.ODBC.Connection!conX.TableExists("GCG_3910_OO_XLS_Map",V.Local.bRet)
+F.Intrinsic.Control.If(V.Local.bRet,=,False)
+	F.Intrinsic.Debug.SetLA("GCG_3910_OO_XLS_Map table not found. Ending Program")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+'sub to determine if we have open office or excel to use.
+F.Intrinsic.Control.CallSub(File_type)
+
+
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+'close connection
+F.ODBC.Connection!conX.Close
+
+
+'end program
+F.Intrinsic.Control.End
+
+Program.Sub.Unload.End
+
+Program.Sub.File_Type.Start
+F.Intrinsic.Control.SetErrorHandler("File_Type_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.bRet.Declare(Boolean)
+
+'determine here whether or not we have open office or xls installed on the computer
+F.Automation.MSExcel.CheckPresence(V.Local.bRet)
+
+
+F.Intrinsic.Control.If(V.Local.bRet,=,True)
+'	'we know to use office of excel
+	V.Global.sFileType.Set("EXCEL")
+F.Intrinsic.Control.Else
+	'check for open office equivalent.
+	F.Automation.OOGeneral.CheckPresence(V.Local.bRet)
+	F.Intrinsic.Control.If(V.Local.bRet,=,True)
+	'we know to use open office
+	V.Global.sFileType.Set("OOCALC")
+	F.Intrinsic.Control.Else
+		F.Intrinsic.Debug.SetLA("Microsoft Excel or Open Office equivalent not found. Ending program.")
+		F.Intrinsic.Control.CallSub(Unload)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+
+'if we haven't exited, lets populate our UDTs.
+F.Intrinsic.Control.CallSub(Get_orders)
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("File_Type_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.File_Type.End
+
+Program.Sub.Excel_Create.Start
+F.Intrinsic.Control.SetErrorHandler("Excel_Create_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSheet.Declare(String)
+V.Local.sFin.Declare(String)
+
+V.Local.sSheet.Set(V.Args.Sheet)
+
+F.Intrinsic.Control.If(V.local.sSheet.Trim,<>,"")
+	F.Automation.MSExcel.WriteSpreadsheet(V.Global.sFile,"",V.Local.sSheet)
+F.Intrinsic.Control.Else
+	F.Intrinsic.Debug.SetLA("No data was passed to be written. Ending program.")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Build("Custom Open Orders XLS Report has been created. {0}{0}File path: {0}{1}",Variable.Ambient.NewLine,V.Global.sFile, V.Local.sFin)
+F.Intrinsic.UI.Msgbox(V.Local.sFin, "Process Complete")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Excel_Create_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Excel_Create.End
+
+Program.Sub.OOffice_Create.Start
+F.Intrinsic.Control.SetErrorHandler("OOffice_Create_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSheet.Declare(String)
+V.Local.sFin.Declare(String)
+
+V.Local.sSheet.Set(V.Args.Sheet)
+
+F.Intrinsic.Control.If(V.local.sSheet.Trim,<>,"")
+	F.Automation.OOCalc.WriteSpreadsheet(V.Global.sFile,"",False,V.Local.sSheet)
+F.Intrinsic.Control.Else
+	F.Intrinsic.Debug.SetLA("No data was passed to be written. Ending program.")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Debug.ToggleOutputListing
+F.Intrinsic.Debug.DumpVariableList
+
+
+F.Intrinsic.String.Build("Custom Open Orders XLS Report has been created. {0}{0}File path: {0}{1}",Variable.Ambient.NewLine,V.Global.sFile, V.Local.sFin)
+F.Intrinsic.UI.Msgbox(V.Local.sFin, "Process Complete")
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("OOffice_Create_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.OOffice_Create.End
+
+Program.Sub.Get_Orders.Start
+F.Intrinsic.Control.SetErrorHandler("Get_Orders_Err")
+F.Intrinsic.Control.ClearErrors
+
+'lets populate our udt for information
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.iC.Declare(Long)
+V.local.iUB.Declare(Long)
+V.Local.sDateFormat.Declare(String)
+V.Local.bExists.Declare(Boolean)
+
+'format our file name
+V.Local.sDateFormat.Set(V.Ambient.Date)
+F.Intrinsic.String.Concat(V.Caller.GlobalDir,"\Open_Orders\",V.local.sDateFormat.FormatYYYYMMDD,"_OPENORDER.xls",V.Global.sFile)
+F.Intrinsic.File.Exists(V.Global.sFile,V.Local.bExists)
+F.Intrinsic.Control.If(V.Local.bExists,=,True)
+	F.Intrinsic.File.DeleteFile(V.global.sFile)
+F.Intrinsic.Control.EndIf
+
+
+'get our price categories from the master table
+F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst","Select Key_Area AS Price_Category,DESCR From V_Price_Cat_Disc")
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	F.Intrinsic.Variable.LoadUDTFromRecordset("conX","Rst","v.uglobal.uPriceCat",False)
+F.Intrinsic.Control.Else
+	F.Intrinsic.Debug.SetLA("No Price Categories found. Continue with program.")
+F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+
+'Get Our Map information from the custom table
+V.Local.sSQL.Set("Select * From GCG_3910_OO_XLS_Map Order By Column_Header,Code_Location,Code_PL")
+F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	F.Intrinsic.Variable.LoadUDTFromRecordset("conX","RST","v.uglobal.uMap",False)
+	F.ODBC.conX!rst.Close
+F.Intrinsic.Control.Else
+	'meaning they havent set up their table
+	F.Intrinsic.Debug.SetLA("No records have been set up for use with spreadsheet. Ending process.")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+'Get Distinct Locaitons to be used with details and summary build
+V.Local.sSQL.Set("Select Distinct Code_Location From GCG_3910_OO_XLS_Map Order By Code_Location")
+F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	F.Intrinsic.Variable.LoadUDTFromRecordset("conX","RST","v.uglobal.uLocations",False)
+	F.ODBC.conX!rst.Close
+F.Intrinsic.Control.Else
+	'meaning they havent set up their table
+	F.Intrinsic.Debug.SetLA("No Location records have been set up for use with spreadsheet. Ending process.")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+'grab only order lines whose product_line is found within our custom map table
+V.local.sSQL.Set("Select Order_NO,Date_Order,Product_Line, Extension_Order,LOCATION From Order_Lines Where Product_Line In(Select Code_PL From GCG_3910_OO_XLS_Map) AND LOCATION IN (SELECT DISTINCT CODE_LOCATION FROM GCG_3910_OO_XLS_MAP) And Record_Type = 'L' Order By Date_Order Desc")
+F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+	F.Intrinsic.Variable.LoadUDTFromRecordset("conX","Rst","v.uglobal.uOpenOrders",False)
+	F.ODBC.conX!rst.Close
+F.Intrinsic.Control.Else
+	F.Intrinsic.Debug.SetLA("No Orders matching Product Line criteria have been found.")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+'GO THROUGH OUR OPEN ORDER UDT, WITH ALL ORDERS WE ARE PAYING ATTENTION TO, THEN QUERY THE ORDER_HEADER INFO LOOKING FOR PRICE_cATEGORY FIELD'
+F.Intrinsic.Control.For(V.Local.iC,V.uGlobal.uOpenOrders.LBound,V.uGlobal.uOpenOrders.UBound,1)
+	F.Intrinsic.String.Concat("Select Price_Category, Date_Order, Order_No From V_Order_Header Where Record_Type = 'A'  And Price_Category <> '' And Order_No = '",V.uGlobal.uOpenOrders(v.Local.iC)!Order_No,"'",V.Local.sSQL)
+	F.ODBC.Connection!conX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.conX!rst.EOF,<>,True)
+		F.Intrinsic.Control.If(V.uGlobal.uPriceCat_OrderH.UBound,=,-1)
+			V.Local.iUB.Set(0)
+			V.uGlobal.uPriceCat_OrderH.Redim(0,V.Local.iUB)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.Math.Add(V.uGlobal.uPriceCat_OrderH.UBound,1,V.Local.iUB)
+			V.uGlobal.uPriceCat_OrderH.RedimPreserve(0,V.Local.iUB)
+		F.Intrinsic.Control.EndIf
+		V.Local.sDateFormat.Set(V.ODBC.conX!rst.FieldValTrim!date_Order)
+		F.Intrinsic.String.Format(V.Local.sDateFormat,"YYYYMMDD",V.Local.sDateFormat)
+		V.uGlobal.uPriceCat_OrderH(v.Local.iUB)!Date_Order.Set(V.Local.sDateFormat)
+		V.uGlobal.uPriceCat_OrderH(v.Local.iUB)!Order_No.Set(V.uGlobal.uOpenOrders(v.Local.iC)!Order_No)
+		V.uGlobal.uPriceCat_OrderH(v.Local.iUB)!Price_Cat.Set(V.ODBC.conX!rst.FieldValTrim!Price_Category)
+	F.Intrinsic.Control.EndIf
+F.ODBC.conX!rst.Close
+F.Intrinsic.Control.Next(V.Local.iC)
+'remove dups against all three informations
+F.Intrinsic.Variable.UDTMultiFlagDuplicates(V.uGlobal.uPriceCat_OrderH!Date_Order,V.uGlobal.uPriceCat_OrderH!Order_No,V.uGlobal.uPriceCat_OrderH!Price_Cat)
+F.Intrinsic.Variable.UDTDeleteFlagged(V.uGlobal.uPriceCat_OrderH)
+F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uPriceCat_OrderH!Date_Order,True)
+
+
+F.Intrinsic.Control.CallSub(Writespreadsheet)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Get_Orders_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Get_Orders.End
+
+Program.Sub.WriteSpreadsheet.Start
+F.Intrinsic.Control.SetErrorHandler("WriteSpreadsheet_Err")
+F.Intrinsic.Control.ClearErrors
+
+'this sub will go through our open orders and sum up each order lines product line amount
+'to be used with the sheet_summary sub
+
+
+
+V.Local.sError.Declare(String)
+V.Local.iC.Declare(Long)
+V.Local.sRet.Declare(String)
+V.Local.iDateCount.Declare(Long)
+V.Local.fExtensionTotal.Declare(Float)
+V.Local.iProdLineCount.Declare(Long)
+V.Local.iUB.Declare(Long)
+'order our udt's
+'date order for OpenOrders, will determine what we need
+'F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uOpenOrders!Date_Order,True)
+F.Intrinsic.Variable.UDTCopy(V.uGlobal.uOpenOrders,V.uGlobal.uCPY_OpenOrders,False)
+F.Intrinsic.Variable.UDTMultiFlagDuplicates(V.uGlobal.uCPY_OpenOrders!Date_Order)
+F.Intrinsic.Variable.UDTDeleteFlagged(V.uglobal.uCPY_OpenOrders)
+F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uCPY_OpenOrders!Date_Order,True)
+
+'go through our product line map, for each specific product line.
+F.Intrinsic.Control.For(V.Local.iProdLineCount,V.uGlobal.uMap.LBound,V.uGlobal.uMap.UBound,1)
+	'loop through our date copy udt for specific dates and then sum our udt
+	F.Intrinsic.Control.For(V.Local.iDateCount,V.uGlobal.uCPY_OpenOrders.LBound,V.uGlobal.uCPY_OpenOrders.UBound,1)
+		'here is where we will get our PL from iProdLineCount, and our specfic date from iDateCount
+'
+'
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uOpenOrders!PL,V.uGlobal.uMap(v.Local.iProdLineCount)!Code_PL,V.uGlobal.uOpenOrders!Date_Order,V.uGlobal.uCPY_OpenOrders(v.Local.iDateCount)!Date_Order,V.uGlobal.uOpenOrders!LOCATION,V.uGlobal.uCPY_OpenOrders(V.Local.iDateCount)!LOCATION,V.Local.sRet)
+		'only care about if if we have a return, otherwise it will be zero and won't be included
+		F.Intrinsic.Control.If(V.Local.sRet,<>,"")
+			F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iC,V.Local.sRet.LBound,V.Local.sRet.UBound,1)
+
+				'SO FOR EACH RETURN WE ARE GOING TO KEEP A TRACK OF OUR SUM AND STORE IN FEXTENSIONTOTAL VARIABLE
+				F.Intrinsic.Math.Add(V.Local.fExtensionTotal,V.uGlobal.uOpenOrders(v.Local.sRet(v.Local.iC))!Extension,V.Local.fExtensionTotal)
+
+			F.Intrinsic.Control.Next(V.Local.iC)
+			'stor our date, pl, and extension amount into our udt.
+			F.Intrinsic.Control.If(V.uGlobal.uExtTotals.UBound,<,0)
+				V.Local.iUB.Set(0)
+				V.uGlobal.uExtTotals.Redim(0,V.Local.iUB)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.Math.Add(V.uGlobal.uExtTotals.UBound,1,V.Local.iUB)
+				V.uGlobal.uExtTotals.RedimPreserve(0,V.Local.iUB)
+			F.Intrinsic.Control.EndIf
+
+			'set our info to the uExtTotals udt
+			V.uGlobal.uExtTotals(v.Local.iUB)!Date_Order.Set(V.uGlobal.uCPY_OpenOrders(v.Local.iDateCount)!Date_Order)
+			V.uGlobal.uExtTotals(v.Local.iUB)!PL.Set(V.uGlobal.uMap(v.Local.iProdLineCount)!Code_PL)
+			V.uGlobal.uExtTotals(v.Local.iUB)!Total_Ext.Set(V.Local.fExtensionTotal)
+			'once we stored our extension total, clear out
+			V.Local.fExtensionTotal.Set(0)
+		F.Intrinsic.Control.Endif
+	F.Intrinsic.Control.Next(V.Local.iDateCount)
+F.Intrinsic.Control.Next(V.Local.iProdLineCount)
+
+F.Intrinsic.Control.CallSub(Sheet_summary)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("WriteSpreadsheet_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.WriteSpreadsheet.End
+
+Program.Sub.Diff_Backlog_Calc.Start
+F.Intrinsic.Control.SetErrorHandler("Diff_BackLog_Calc_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'sub routine that will figure out our difference from the most recent two order dates
+'and do the %backlog, which will be the column total/Grand Total
+
+V.Local.sDiff.Declare(String)
+V.Local.sDiff1.Declare(String)
+V.Local.sDiff2.Declare(String)
+V.Local.sBackLog.Declare(String)
+V.Local.fBackLog.Declare(Float)
+V.Local.fGrand.Declare(Float)
+V.Local.iCount.Declare(Long)
+V.Local.fDiff.Declare(Float)
+
+V.Local.sDiff1.Set(V.Args.Diff1)
+V.Local.sDiff2.Set(V.Args.Diff2)
+V.Local.fGrand.Set(V.Args.Grand)
+
+'Go Through our two difference rows
+F.Intrinsic.String.Split(V.Local.sDiff1,"*!*",V.Local.sDiff1)
+F.Intrinsic.String.Split(V.Local.sDiff2,"*!*",V.Local.sDiff2)
+
+F.Intrinsic.Control.For(V.Local.iCount,V.Local.sDiff1.lbound,V.Local.sDiff1.UBound,1)
+	F.Intrinsic.Math.Sub(V.Local.sDiff1(v.Local.iCount),V.Local.sDiff2(v.Local.iCount),V.Local.fDiff)
+	F.Intrinsic.Math.Div(V.Local.sDiff1(v.Local.iCount),V.Local.fGrand,V.Local.fBackLog)
+	F.Intrinsic.Math.Round(V.Local.fBackLog,2,V.Local.fBackLog)
+	F.Intrinsic.Math.Mult(V.Local.fBackLog,100,V.Local.fBackLog)
+	F.Intrinsic.Control.If(V.Local.sDiff.Trim,=,"")
+		V.Local.sDiff.Set(V.Local.fDiff)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Concat(V.Local.sDiff,"*!*",V.Local.fDiff,V.Local.sDiff)
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.If(V.Local.sBackLog.Trim,=,"")
+		V.Local.sBackLog.Set(V.Local.fBackLog)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Concat(V.Local.sBackLog,"*!*",V.Local.fBackLog,V.Local.sBackLog)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.iCount)
+
+F.Intrinsic.Variable.AddRV("sDiff",V.Local.sDiff)
+F.Intrinsic.Variable.AddRV("sBackLog",V.Local.sBackLog)
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Diff_BackLog_Calc_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Diff_Backlog_Calc.End
+
+Program.Sub.Sheet_Summary.Start
+F.Intrinsic.Control.SetErrorHandler("Sheet_Summary_Err")
+F.Intrinsic.Control.ClearErrors
+
+'Here is where we will build the summary sheet of the spreadsheet.
+'first row will be the column_names from the uMap udt
+'then each following row will begin with the date of orders, then the totals of each column.
+'the PL's are set up through the GCG_OO_XLS_Map table, so for each column we may have multiple PL's, have to do a running total
+'for each PL's from our Map against our column header we will total up, then write a column data
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+V.local.sCol.Declare(String)
+V.Local.sCols.Declare(String)
+V.Local.sHeader.Declare(String)
+V.Local.sAmounts.Declare(String)
+V.Local.sLoc.Declare(String)
+V.Local.sRow.Declare(String)
+V.Local.sSheet.Declare(String)
+V.Local.sDate.Declare(String)
+V.Local.dDate.Declare(Date)
+V.Local.sDiff.Declare(String)
+V.Local.sDiff1.Declare(String)
+V.Local.sDiff2.Declare(String)
+V.Local.sGrand.Declare(String)
+V.Local.sBacklog.Declare(String)
+
+
+
+V.Local.fTotal.Declare(Float)
+V.Local.fLocTotal.Declare(Float)
+V.Local.fGrandTotal.Declare(Float)
+V.Local.fTopGrand.Declare(Float)
+V.Local.fDiff1.Declare(Float)
+V.Local.fDiff2.Declare(Float)
+V.Local.fDiff.Declare(Float)
+
+V.Local.iR.Declare(Long)
+V.Local.iD.Declare(Long)
+V.Local.iL.Declare(Long)
+V.Local.iPL.Declare(Long)
+V.Local.iC.Declare(Long)
+V.Local.iA.Declare(Long)
+
+
+
+'need to loop through my column map product lines based off of my columns?
+'First our Column header
+'we have to copy of udt from our original map, to our udt copy
+F.Intrinsic.Variable.UDTCopy(V.uGlobal.uMap,V.uGlobal.uMapCopy,False)
+'delete our multiple column_header information, cause we will have it.
+F.Intrinsic.Variable.UDTMultiFlagDuplicates(V.uGlobal.uMapCopy!Col_Header)
+F.Intrinsic.Variable.UDTDeleteFlagged(V.uGlobal.uMapCopy)
+F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uMapCopy!Col_Header,False)
+F.Intrinsic.Control.For(V.Local.iC,V.uGlobal.uMapCopy.LBound,V.uGlobal.uMapCopy.UBound,1)
+	F.Intrinsic.Control.If(V.Local.sCol.Trim,=,"")
+		V.Local.sCol.Set(V.uGlobal.uMapCopy(v.Local.iC)!Col_Header)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Concat(V.Local.sCol,"*!*",V.uGlobal.uMapCopy(v.Local.iC)!Col_Header,V.Local.sCol)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.iC)
+'
+
+'set our columnes
+'then include our header row with information for order date
+'sheader includes our order date text, columns, and our locations
+V.Local.sHeader.Set(V.local.scol)
+'store our  col into scols and split scols
+
+F.Intrinsic.String.Concat("Order Date*!*",V.Local.sHeader,V.Local.sHeader)
+'F.Intrinsic.Control.for(V.local.ic,V.uglobal.ulocations.lbound,V.uglobal.ulocations.ubound,1)
+'	F.Intrinsic.String.Concat(V.Local.sHeader,"*!*",V.uGlobal.uLocations(v.Local.iC)!Location,V.Local.sHeader)
+'F.Intrinsic.Control.Next(V.Local.iC)
+F.Intrinsic.Control.For(V.Local.iL,V.uGlobal.uLocations.LBound,V.uGlobal.uLocations.UBound,1)
+	F.Intrinsic.String.Concat(V.Local.sHeader,"*!*",V.uGlobal.uLocations(v.Local.iL)!Location,V.Local.sHeader)
+F.Intrinsic.Control.next(V.local.il)
+
+F.Intrinsic.String.Concat(V.Local.sHeader,"*!*","Grand Total",V.Local.sHeader)
+
+
+
+
+'still go through our particular dates
+F.Intrinsic.Control.For(V.Local.iD,V.uGlobal.uCPY_OpenOrders!Date_Order.LBound,V.uGlobal.uCPY_OpenOrders!Date_Order.Ubound,1)
+''scolstoresourcolumnheader
+	F.Intrinsic.String.Split(V.Local.sCol,"*!*",V.Local.sCols)
+	F.Intrinsic.Control.For(V.Local.iC,V.Local.sCols.LBound,V.Local.sCols.UBound,1)
+	'	look  in our map udt for the prod lines that go with our col
+		'got to look in our uMap for our particular product lines that go within our column, 'this will return us values that have the column header we need
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uMap!Col_Header,V.Local.sCols(v.Local.iC),V.Local.sRet)
+		F.Intrinsic.Control.If(V.Local.sRet.Trim,<>,"")
+			F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iR,V.Local.sRet.LBound,V.Local.sRet.UBound,1)
+				'now we have our product lines, so go through our extentions udt with the basis of our date order, and our product line loop
+				F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uExtTotals!Date_Order,V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,V.uGlobal.uExtTotals!PL,V.uGlobal.uMap(v.Local.sRet(v.Local.iR))!Code_PL,V.Local.sAmounts)
+				F.Intrinsic.Control.If(V.Local.sAmounts.Trim,<>,"")
+					F.Intrinsic.String.Split(V.Local.sAmounts,"*!*",V.Local.sAmounts)
+					F.Intrinsic.Control.For(V.Local.iA,V.Local.sAmounts.LBound,V.Local.sAmounts.UBound,1)
+						F.Intrinsic.Math.Add(V.LocaL.fTotal,V.uGlobal.uExtTotals(v.Local.sAmounts(v.Local.iA))!Total_Ext,V.Local.fTotal)
+					'amounts counter for sAmounts that will store our extensions
+					F.Intrinsic.Control.Next(V.Local.iA)
+'				F.Intrinsic.Control.Else
+'					V.Local.fTotal.Set(0)
+				'sAmount trim endif not equal to blank
+				F.Intrinsic.Control.EndIf
+			'our sRet counter for our column header pl's that are contained in the column
+			F.Intrinsic.Control.Next(V.Local.iR)
+		'sret end if
+		F.Intrinsic.Control.Endif
+		'add our total to a grand total column for later use
+		F.Intrinsic.Math.Add(V.Local.fGrandTotal,V.Local.fTotal,V.Local.fGrandTotal)
+		F.Intrinsic.Control.If(V.Local.sRow.Trim,=,"")
+			V.Local.sDate.Set(V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order)
+			F.Intrinsic.Date.ConvertDString(V.Local.sDate,"YYYYMMDD",V.Local.dDate)
+			F.Intrinsic.String.Format(V.Local.dDate,"MM-DD-YYYY",V.Local.sDate)
+'			f.Intrinsic.Date.ConvertDString(
+'			F.Intrinsic.String.Concat(V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,"*!*",V.Local.fTotal,V.Local.sRow)
+'			putting a tick mark before our date string so it will stay the date in the spreadsheet
+			F.Intrinsic.String.Concat("'",V.Local.sDate,"*!*",V.Local.fTotal,V.Local.sRow)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.local.fTotal,V.Local.sRow)
+		F.Intrinsic.Control.EndIf
+		'we have to keep track of the first two dates for the idfference at the end of the spreadsheet
+		'it will be most recent order against the second most recent
+		F.Intrinsic.Control.If(V.Local.iD,=,0)
+			F.Intrinsic.Control.If(V.Local.sDiff1.Trim,=,"")
+				V.Local.sDiff1.Set(V.Local.fTotal)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.Concat(V.Local.sDiff1,"*!*",V.Local.fTotal,V.Local.sDiff1)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.ElseIf(V.Local.iD,=,1)
+			F.Intrinsic.Control.If(V.Local.sDiff2.Trim,=,"")
+				V.Local.sDiff2.set(V.Local.fTotal)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.Concat(V.Local.sDiff2,"*!*",V.Local.fTotal,V.Local.sDiff2)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+		V.Local.fTotal.Set(0.00)
+	'scol counter for our column names	
+	F.Intrinsic.Control.Next(V.Local.iC)
+	'when we have written all our column, we also have to write our location totals. doing the same above, based on column header, but this time returned location values whose product lines are included in that location
+	F.Intrinsic.Control.For(V.Local.iL,V.uGlobal.uLocations.LBound,V.uGlobal.uLocations.UBound,1)
+		'concat this locaiton to our header row so we know which location we are on.
+		'look through our map udt for our locations in the map, to get the pl's that belong in that location
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uMap!Code_Location,V.uGlobal.uLocations(v.Local.iL)!Location,V.Local.sRet)
+		F.Intrinsic.Control.If(V.Local.sRet.Trim,<>,"")
+			'we are going to split our sret
+			F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iR,V.Local.sRet.LBound,V.Local.sRet.UBound,1)
+				F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uExtTotals!Date_Order,V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,V.uGlobal.uExtTotals!PL,V.uGlobal.uMap(v.Local.sRet(v.Local.iR))!Code_PL,V.Local.sAmounts)
+				F.Intrinsic.control.If(V.Local.sAmounts.Trim,<>,"")
+					F.Intrinsic.String.Split(V.Local.sAmounts,"*!*",V.Local.sAmounts)
+			F.Intrinsic.Control.For(V.Local.iA,V.Local.sAmounts.LBound,V.Local.sAmounts.UBound,1)
+				F.Intrinsic.Math.Add(V.Local.fLocTotal,V.uGlobal.uExtTotals(v.Local.sAmounts(v.Local.iA))!Total_Ext,V.Local.fLocTotal)
+			F.Intrinsic.Control.Next(V.Local.iA)
+				F.Intrinsic.Control.EndIf
+			'count for our returned pls that have that location
+			F.Intrinsic.Control.Next(V.Local.iR)
+		F.Intrinsic.Control.Else
+		F.Intrinsic.Control.EndIf
+		'concat our locations to our row
+		F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fLocTotal,V.Local.sRow)
+		'we have to keep track of the first two dates for the idfference at the end of the spreadsheet
+		'it will be most recent order against the second most recent
+		F.Intrinsic.Control.If(V.Local.iD,=,0)
+			F.Intrinsic.Control.If(V.Local.sDiff1.Trim,=,"")
+				V.Local.sDiff1.Set(V.Local.fLocTotal)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.Concat(V.Local.sDiff1,"*!*",V.Local.fLocTotal,V.Local.sDiff1)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.ElseIf(V.Local.iD,=,1)
+			F.Intrinsic.Control.If(V.Local.sDiff2.Trim,=,"")
+				V.Local.sDiff2.set(V.Local.fLocTotal)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.Concat(V.Local.sDiff2,"*!*",V.Local.fLocTotal,V.Local.sDiff2)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+		V.Local.fLocTotal.Set(0.00)
+	'locations udt counter
+	F.Intrinsic.Control.Next(V.Local.iL)
+
+'	put our grand total in there
+	F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fGrandTotal,V.Local.sRow)
+		F.Intrinsic.Control.If(V.Local.iD,=,0)
+			V.Local.fTopGrand.Set(V.Local.fGrandTotal)
+			F.Intrinsic.Control.If(V.Local.sDiff1.Trim,=,"")
+'				V.Local.sDiff1.Set(V.Local.fLocTotal)
+			F.Intrinsic.Control.Else
+				F.Intrinsic.String.Concat(V.Local.sDiff1,"*!*",V.Local.fGrandTotal,V.Local.sDiff1)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.ElseIf(V.Local.iD,=,1)
+			F.Intrinsic.Control.If(V.Local.sDiff2.Trim,=,"")
+'				V.Local.sDiff2.set(V.Local.fLocTotal)
+		F.Intrinsic.Control.Else
+			F.Intrinsic.String.Concat(V.Local.sDiff2,"*!*",V.Local.fGrandTotal,V.Local.sDiff2)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	'so for every time we go through all our columns we are going to store srow in ssheet, delimit by $!$, then clear out srow
+	F.Intrinsic.Control.If(V.Local.sSheet.Trim,=,"")
+		V.Local.sSheet.Set(V.Local.sRow)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Concat(V.Local.sSheet,"$!$",V.Local.sRow,V.Local.sSheet)
+	F.Intrinsic.Control.EndIf
+	V.Local.sRow.Set("")
+	V.Local.fGrandTotal.Set(0.00)
+'datecounteruCPYdate
+F.Intrinsic.Control.Next(V.Local.iD)
+
+F.Intrinsic.String.Concat(V.Local.sHeader,"$!$",V.Local.sSheet,V.Local.sSheet)
+'
+'call the Diff_Backlog sub to calc our difference and backlog
+F.Intrinsic.Control.CallSub(Diff_backlog_calc,"Diff1",V.Local.sDiff1,"Diff2",V.Local.sDiff2,"Grand",V.Local.fTopGrand)
+'concat these two values to the end of our sheet
+V.Local.sDiff.Set(V.Args.sDiff)
+V.Local.sBacklog.Set(V.Args.sBacklog)
+F.Intrinsic.String.Concat(V.Local.ssheet,"$!$$!$Difference:*!*",V.Local.sDiff,"$!$Backlog %:*!*",V.Local.sBacklog,V.Local.sSheet)
+
+
+'passing scol becuase all that includes is our particluar column names that we want to pay attention to, for now
+F.Intrinsic.Control.CallSub(Sheet_details,"Col",V.local.sCol,"sSheet",V.Local.sSheet)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Sheet_Summary_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Sheet_Summary.End
+
+Program.Sub.Sheet_Details.Start
+F.Intrinsic.Control.SetErrorHandler("Sheet_Details_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sSheet1.Declare(String)
+V.Local.sSheet.Declare(String)
+V.Local.sCol.Declare(String)
+V.Local.sHeader.Declare(String)
+V.Local.sRow.Declare(String)
+V.Local.sRetCol.Declare(String)
+V.Local.sCols.Declare(String)
+V.Local.sAmount.Declare(String)
+V.Local.dDate.Declare(Date)
+V.Local.sdate.Declare(String)
+
+V.Local.iD.Declare(Long)
+V.Local.iR.Declare(Long)
+V.Local.iC.Declare(Long)
+V.Local.iE.Declare(Long)
+V.Local.iT.Declare(Long)
+V.Local.iA.Declare(Long)
+V.Local.iB.Declare(Long)
+
+
+V.Local.fTotal.Declare(Float)
+
+F.Intrinsic.Variable.UDTMultiQuickSort(V.uGlobal.uPriceCat_OrderH!Date_Order,True)
+
+
+'going to have the same amount of col
+V.Local.sCol.Set(V.Args.col)
+F.Intrinsic.String.Split(V.Local.sCol,"*!*",V.Local.sCols)
+
+V.Local.sSheet1.Set(V.Args.sSheet)
+
+'this header will be price_Category, Col array, thats all
+F.Intrinsic.String.Concat("Price Category*!*",V.Local.scol,V.Local.sHeader)
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+
+F.Intrinsic.Control.For(V.Local.iD,V.uGlobal.uCPY_OpenOrders!Date_Order.LBound,V.uGlobal.uCPY_OpenOrders!Date_Order.UBound,1)
+	'WRITE A DATE HEADER FOR FOR EACH NEW DATE
+	 F.Intrinsic.Control.If(V.Local.sRow.Trim,=,"")
+
+		F.Intrinsic.Date.ConvertDString(V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,"YYYYMMDD",V.Local.dDate)
+		F.Intrinsic.String.Format(V.Local.dDate,"MM-DD-YYYY",V.Local.sdate)
+		F.Intrinsic.String.Concat("Order Date:",V.local.sdate,"$!$",V.Local.sRow)
+	F.Intrinsic.Control.EndIf
+
+	'also for each price category
+	F.Intrinsic.Control.For(V.Local.ic,V.uGlobal.uPriceCat.LBound,V.uGlobal.uPriceCat.UBound,1)
+
+		'have to write our price category for each row, will be using DESCR from uPriceCat udt
+		F.Intrinsic.String.Concat(V.Local.sRow,V.uGlobal.uPriceCat(v.Local.iC)!Descr,V.Local.sRow)
+		'query our orderh udt based off of our certain price category, and date order to get order_nos for our lines to use against the open order udt
+		F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uPriceCat_OrderH!Date_Order,V.uGlobal.uCPY_OpenOrders(v.Local.iD)!Date_Order,V.uGlobal.uPriceCat_OrderH!Price_Cat,V.uGlobal.uPriceCat(v.Local.iC)!Price_Category,V.Local.sRet)
+		F.Intrinsic.Control.If(V.Local.sRet.Trim,<>,"")
+
+			F.Intrinsic.String.Split(V.Local.sRet, "*!*", V.Local.sRet)
+			F.Intrinsic.Control.For(V.Local.iR,V.Local.sRet.LBound,V.Local.sRet.UBound,1)
+					F.Intrinsic.Control.For(V.Local.iT,V.Local.sCols.LBound,V.Local.sCols.UBound,1)
+'						we have to get the product lines that are associated with the map udt sret will return us all those pl's that are associated with the column header we are on
+						F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uMap!Col_Header,V.Local.sCols(v.Local.iT),V.Local.sRetCol)
+						F.Intrinsic.Control.If(V.Local.sRetCol.Trim,<>,"")
+							F.Intrinsic.String.Split(V.Local.sRetCol,"*!*",V.Local.sRetCol)
+							F.Intrinsic.Control.For(V.Local.iE,V.Local.sRetCol.LBound,V.Local.sRetCol.UBound,1)
+								F.Intrinsic.Variable.UDTMultiSeek(V.uGlobal.uOpenOrders!Order_No,V.uGlobal.uPriceCat_orderH(v.Local.sRet(v.Local.iR))!Order_No,V.uGlobal.uOpenOrders!PL,V.uGlobal.uMap(v.Local.sRetCol(v.Local.iE))!Code_PL,V.Local.sAmount)
+								 F.Intrinsic.Control.If(V.Local.sAmount.Trim,<>,"")
+									F.Intrinsic.String.Split(V.Local.sAmount,"*!*",V.Local.sAmount)
+									F.Intrinsic.Control.For(V.Local.iA,V.Local.sAmount.LBound,V.Local.sAmount.UBound,1)
+										F.Intrinsic.Math.Add(V.Local.fTotal,V.uGlobal.uOpenOrders(v.Local.sAmount(v.Local.iA))!Extension,V.Local.fTotal)
+									F.Intrinsic.Control.Next(V.Local.iA)
+								F.Intrinsic.Control.EndIf
+							F.Intrinsic.Control.Next(V.Local.iE)
+						F.Intrinsic.Control.EndIf
+'					F.Intrinsic.Control.If(V.Local.fTotal,>,0)
+'F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fTotal,V.Local.sRow)F.Intrinsic.Control.Else
+'						clearoutourtotalforournextcolumn
+'						havetoputazeroprecededbyasinglequotesoexcelwillnottrimitoff.F.Intrinsic.String.Concat(V.Local.sRow,"*!*'0",V.Local.sRow)F.Intrinsic.Control.EndIf
+					F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fTotal,V.Local.sRow)
+					V.Local.fTotal.Set(0.00)
+				F.Intrinsic.Control.next(V.Local.iT)
+		'count for our sret return variable that has our order no's needed
+			F.Intrinsic.Control.Next(V.Local.iR)
+		F.Intrinsic.Control.Else
+			'got to zero fill against our column, becuase we have no orders in this date range that exist with the price category
+			F.Intrinsic.Control.For(V.Local.iB,V.Local.sCols.LBound,V.Local.sCols.UBound,1)
+				F.Intrinsic.String.Concat(V.Local.sRow,"*!*",V.Local.fTotal,V.Local.sRow)
+			F.Intrinsic.Control.Next(V.Local.iB)
+			'so we have blank totals atleast?
+			'sretend if
+		F.Intrinsic.Control.EndIf
+'		F.Intrinsic.String.Concat(V.Local.sRow,"$!$",V.Local.sRow)
+		F.Intrinsic.String.Concat(V.Local.sSheet,"$!$",V.Local.sRow,"",V.Local.sSheet)
+		V.Local.sRow.Set("")
+	'counter for our price category
+	F.Intrinsic.Control.Next(V.Local.iC)
+'splitourdateordersbyanewline
+F.Intrinsic.String.Concat(V.Local.sSheet,"$!$",V.Local.sSheet)
+F.Intrinsic.Control.next(V.Local.iD)
+
+F.Intrinsic.String.Concat(V.Local.sSheet1,"&^&",V.local.sHeader,"$!$",V.Local.sSheet,V.Local.sSheet)
+
+
+
+'determine which spreadsheet format we are writing to.
+F.Intrinsic.Control.If(V.Global.sFileType.Trim,=,"EXCEL")
+	F.Intrinsic.Control.CallSub(Excel_create,"Sheet",V.Local.sSheet)
+F.Intrinsic.Control.Elseif(V.Global.sFileType.Trim,=,"OOCALC")
+	F.Intrinsic.Control.CallSub(Ooffice_create,"Sheet",V.Local.sSheet)
+F.Intrinsic.Control.Else
+	'don't have either, shouldn't hit this but just in case.
+	F.Intrinsic.Debug.SetLA("Excel or OO Office Equivalent not found. Ending Program.")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Sheet_Details_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_3910_OO_XLS_Build.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.Debug.SetLA(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Sheet_Details.End
+
+Program.Sub.Comments.Start
+${$0$}$$}$$}$11/1/2016 9:45:47 AM$}$False
+${$3$}$0$}$$}$-1$}$-1$}$$}$1/1/1900$}$Maintenance Program that is described in quote 5491.
+
+Program.Sub.Comments.End
