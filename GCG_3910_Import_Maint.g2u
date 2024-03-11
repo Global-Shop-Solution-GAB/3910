@@ -1,0 +1,38 @@
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+V.Local..BulkDeclareString(sFilePath, sRet, ssql)
+V.Local.iC.Declare(Long)
+
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+Function.Intrinsic.UI.ShowOpenFileDialog("", "","",V.Local.sFilePath) 
+
+F.Automation.MSExcel.ReadSpreadsheet(V.Local.sFilePath, V.Local.sRet)
+'delete all first
+F.ODBC.Connection!con.Execute("Delete From GCG_3910_OO_XLS_Map")
+
+F.Data.DataTable.CreateFromString("D", V.Local.sRet,"Column_Header*!*Code_Location*!*Code_PL*!*Loc_Desc*!*ID", "String*!*String*!*String*!*String*!*String", "*!*", "$!$",TRUE)
+
+F.Data.DataTable.DeleteRow("D", 0)
+
+
+F.Intrinsic.Control.For(V.local.iC, V.DataTable.D.RowCount--,0, -1)
+	Function.Intrinsic.Control.If(V.DataTable.D(V.Local.iC).Column_Header!FieldValTrim, =, "")
+		F.Data.DataTable.DeleteRow("D", V.Local.iC)
+	Function.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Next(V.Local.iC)
+
+V.Local.iC.Set(0)
+F.Intrinsic.Control.For(V.local.iC, 0,V.DataTable.D.RowCount--, 1)
+	F.Intrinsic.String.Build("Insert Into GCG_3910_OO_XLS_Map (Column_Header,Code_Location,Code_PL) Values('{0}', '{1}', '{2}')", V.DataTable.D(V.Local.iC).Column_Header!FieldValTrim, V.DataTable.D(V.Local.iC).Code_Location!FieldValTrim, V.DataTable.D(V.Local.iC).Code_PL!FieldValTrim, V.Local.ssql)
+	F.ODBC.Connection!con.Execute(V.Local.ssql)
+	
+F.Intrinsic.Control.Next(V.Local.iC)
+
+Program.Sub.Main.End
+
+Program.Sub.Comments.Start
+${$0$}$$}$DH1$}$9/12/2017 10:51:06 AM$}$False
+Program.Sub.Comments.End
